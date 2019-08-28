@@ -14,11 +14,11 @@ namespace Models
     
     public partial class News
     {
-        public int NewsId { get; set; }
+        public int? NewsId { get; set; }
         public string NewsTitle { get; set; }
         public string NewsContents { get; set; }
         public Nullable<System.DateTime> PublishTime { get; set; }
-        public Nullable<int> CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     
         public virtual NewsCategory NewsCategory { get; set; }
     }
