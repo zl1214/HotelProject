@@ -68,5 +68,14 @@ namespace DAL
                 return table;
             }
         }
+
+        //按照id查询新闻详细信息
+        public News SelectNewsById(int newId)
+        {
+            using (HotelDBEntities db=new HotelDBEntities())
+            {
+                return (from n in db.News where n.NewsId == newId select n).FirstOrDefault();
+            }
+        }
     }
 }
