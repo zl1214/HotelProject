@@ -19,7 +19,7 @@ namespace Models
             this.Dishes = new HashSet<Dishes>();
         }
     
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string CategoryName { get; set; }
     
         public virtual ICollection<Dishes> Dishes { get; set; }

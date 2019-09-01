@@ -17,7 +17,7 @@ namespace Models
         public int DishesId { get; set; }
         public string DishesName { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     
         public virtual DishesCategory DishesCategory { get; set; }
     }
