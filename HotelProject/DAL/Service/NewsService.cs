@@ -45,23 +45,16 @@ namespace DAL
         }
 
         //按照id,类别分页查询新闻
-        public TableModel<object> SelectNews(int? newId, int? newCategory, int page, int limit)
+        public TableModel<object> SelectNews(int? newCategory, int page, int limit)
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
                 var list = from n in db.News select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId };
-                if (newId==null&&newCategory!=null)
+                if (newCategory!=null)
                 {
                     list = from n in list where n.CategoryId == newCategory select n;
                 }
-                else if (newId != null && newCategory != null)
-                {
-                    list = from n in list where n.CategoryId == newCategory&&n.NewsId==newId select n;
-                }
-                else if (newId != null && newCategory == null)
-                {
-                    list = from n in list where n.NewsId == newId select n;
-                }
+                
                 TableModel<object> table = new TableModel<object>();
                 table.count = list.Count();
                 table.data = list.OrderBy(s=>s.NewsId).Skip((page-1)*limit).Take(limit).ToList<object>();

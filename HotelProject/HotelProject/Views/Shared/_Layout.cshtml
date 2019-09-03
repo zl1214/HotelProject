@@ -8,8 +8,8 @@
     <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
-    
-        @RenderBody()
-    
+            @RenderSection("rightTool",required:false)       
+            @RenderBody()
+            @RenderSection("down", required: false)       
 </body>
 </html>

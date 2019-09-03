@@ -7,19 +7,18 @@
     <script src="~/Content/layui/layui.js"></script>
     <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
 </head>
-<body style="background-color:#455A75" class="layui-layout-body">
+<body style="background-color:#455A75" >
     <div class="layui-container" style="margin-top:20px">
         <div class="layui-layout layui-layout-admin">
-            <!--头部内容-->
-
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <img src="~/Content/images/Head/标题.png" />
-                </div>
-                <div class="layui-col-md6 " align="right">
-                    <img src="~/Content/images/Head/地址.png" />
-                </div>
-            </div>
+            <!--头部内容--><div class="layui-row">
+    <div class="layui-col-md6">
+        <img src="~/Content/images/Head/标题.png" />
+    </div>
+    <div class="layui-col-md6 " align="right">
+        <img src="~/Content/images/Head/地址.png" />
+    </div>
+</div>            
+            
             <div class="layui-header">
                 <ul class="layui-nav">
                     <li class="layui-nav-item"><a data-type="menu" data-href="@Url.Action("Index","Company")"><i class="layui-icon layui-icon-home">首页</i></a></li>
@@ -35,9 +34,10 @@
             </div>
         </div>
         <!--主内容区-->
-        <div ><iframe name="main_content" id="main_content" frameborder="0" style="width:100%;height:2000px"></iframe></div>
+        <div style="overflow:hidden;width:100%;height:1300px;"><iframe name="main_content" id="main_content"style="width:100%;height:100%;overflow:hidden" frameborder="0"  src="@Url.Action("Index","Company")"></iframe></div>   
+       
         <!--脚注-->
-        <div >深圳瑞吉酒店非官方网站</div>
+        <div style="width:100%;background-color:#000000;" ><div style="margin:10px 0px 20px 20px;padding:20px 0px; color:#FFFFFF;">深圳瑞吉酒店非官方网站</div></div>
         
     </div>
     
