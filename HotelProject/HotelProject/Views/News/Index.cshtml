@@ -19,8 +19,8 @@
                 <div class="layui-input-block">
                     <select id="CategoryId">
                         <option selected="" value="">请选择类别</option>
-                        <option value="1">社会新闻</option>
-                        <option value="2">公司新闻</option>
+                        <option value="1">公司新闻</option>
+                        <option value="2">社会新闻</option>
                     </select>
                 </div>
             </div>
@@ -40,6 +40,7 @@
                 var table = layui.table,
                     $ = layui.$;
 
+                //表格初始化
                 table.render({
                     elem: '#newsTable',
                     url: "@Url.Action("GetNewsList")",
@@ -47,9 +48,21 @@
                     skin: 'nob',
                     cols: [[
                         { field: 'NewsTitle', title: '新闻标题', width: '40%', align: 'center' },
-                        { field: 'CategoryName', title: '新闻分类', width: '30%',align: 'center' },
-                        { field: 'PublishTime', title: '发布时间', width: '30%',align: 'center', templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } }
+                        { field: 'CategoryName', title: '新闻分类', width: '30%', align: 'center' },
+                        { field: 'PublishTime', title: '发布时间', width: '30%', align: 'center', templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } }
                     ]]
-                })
+                });
+
+                //表格重载
+                $('#querystu').click(function () {
+                    var categoryId = $('#CategoryId').val();
+                    table.reload('newsTable', {
+                        url: '@Url.Action("GetNewsList")',
+                        where: {
+                            newCategory:categoryId
+                        }, //设定异步数据接口的额外参数
+                        height: 480
+                    });
+                });
             })
         </script>
