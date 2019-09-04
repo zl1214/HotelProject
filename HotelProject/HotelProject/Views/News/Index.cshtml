@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <table class="layui-table" id="newsTable"></table>
+    <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
 </div>
 
 
@@ -70,6 +70,12 @@
                         }, //设定异步数据接口的额外参数
                         height: 480
                     });
+                });
+
+                //双击获取详情
+                table.on('rowDouble(newsTable)', function (obj) {                    
+                    var newsId = obj.data.NewsId;                   
+                    window.location = '/News/Detail?newId=' + newsId;
                 });
             })
         </script>
