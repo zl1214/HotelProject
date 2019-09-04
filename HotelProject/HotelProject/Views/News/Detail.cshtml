@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "新闻详情";
+}
+
+@section CustomCss{
+<link href="~/Content/CSS/NewsDetail.css" rel="stylesheet" />
+    
+}
+
+@section TopContent{
+
+    <blockquote class="layui-elem-quote"><h2>新闻动态--详情</h2></blockquote>
+
+}
+
+@section down{
+    <div id="down">
+        <hr />
+        <div id="title"><h2>会议、餐饮、娱乐</h2></div>
+        <div id="downimg"><img src="~/Content/images/Carousel/娱乐.png" /></div>
+    </div>
+}
+<div id="newsDetail">
+    <div id="newsTitle">
+       <h2>@ViewBag.news.NewsTitle</h2>
+    </div> 
+    <div id="newsPublishTime">
+       发布时间： @ViewBag.news.PublishTime
+    </div>
+    <div id="newsNewsContents">
+        <p>
+            @ViewBag.news.NewsContents
+        </p>
+        
+    </div>
+    
+</div>

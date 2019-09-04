@@ -6,10 +6,61 @@
     <title>@ViewBag.Title</title>
     <script src="~/Content/layui/layui.js"></script>
     <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Layout.css" rel="stylesheet" />
+    @RenderSection("CustomCss", false)
 </head>
-<body>
-            @RenderSection("rightTool",required:false)       
+<body >
+    <div class="layui-container" >
+        <div class="layui-layout layui-layout-admin">
+            <!--头部内容-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <img src="~/Content/images/Head/标题.png" />
+                </div>
+                <div class="layui-col-md6 " align="right">
+                    <img src="~/Content/images/Head/地址.png" />
+                </div>
+            </div>
+
+            <div class="layui-header">
+                <ul class="layui-nav">
+                    <li class="layui-nav-item"><a href="@Url.Action("Index","Company")"><i class="layui-icon layui-icon-home">首页</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("Index","News")"><i class="layui-icon layui-icon-website">新闻动态</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("Index","Dishes")"><i class="layui-icon layui-icon-carousel">美食展示</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("Environment","Company")"><i class="layui-icon layui-icon-tree">餐厅环境</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("JoinUs","Company")"><i class="layui-icon layui-icon-util">加盟连锁</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("Suggestions", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("RecruitmentList", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("AboutUs","Company")"><i class="layui-icon layui-icon-tips">关于我们</i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!--主内容区-->
+        <div class="mainContent">
+            @RenderSection("TopContent", required: false)
             @RenderBody()
-            @RenderSection("down", required: false)       
+            @RenderSection("down", required: false)
+        </div>
+        <!--脚注-->
+        <div class="footer"><div class="CompanyName">深圳瑞吉酒店非官方网站</div></div>
+
+    </div>
+                   
+           
+               
+    
+    <script type="text/javascript">
+        layui.use(['element','jquery'], function () {
+            var element = layui.element,
+                $=layui.$;
+
+            $("[data-type='menu']").click(function () {
+                var href =$(this).attr("data-href");
+                $('#main_content').attr("src", href);
+            });
+
+        });
+    </script>    
 </body>
 </html>

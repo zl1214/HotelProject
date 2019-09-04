@@ -16,10 +16,19 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+
+        //根据条件获取新闻列表
         public ActionResult GetNewsList(int? newCategory, int page, int limit)
         {
             var obj = manager.GetAllNews(newCategory, page, limit);
             return Json(obj,JsonRequestBehavior.AllowGet);
+        }
+
+        //根据newID获取新闻详情
+        public ActionResult Detail(int newId)
+        {
+            ViewBag.news = manager.SelectNewsById(newId);
+            return View();
         }
     }
 }

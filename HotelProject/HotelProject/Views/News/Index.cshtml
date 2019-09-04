@@ -1,18 +1,24 @@
-﻿@section rightTool{
+﻿@section CustomCss{
+    
+<link href="~/Content/CSS/News.css" rel="stylesheet" />
+    }
+
+@section TopContent{
  
-        <blockquote class="layui-elem-quote" style="padding:20px 20px;background-color:#534d4d;color:#FFFFFF"><h2>新闻动态</h2></blockquote> 
+        <blockquote class="layui-elem-quote"><h2>新闻动态</h2></blockquote> 
     
     }
 
 @section down{
-    <div style="background-color:#FFFFFF;width:100%;padding-top:5px">
+    <div id="down">
     <hr />
-    <div style="margin:20px 10px;padding-left:100px"><h2>会议、餐饮、娱乐</h2></div>
-    <div style="padding:0px 0px 20px 100px"><img src="~/Content/images/Carousel/娱乐.png" /></div>
+    <div id="title"><h2>会议、餐饮、娱乐</h2></div>
+    <div id="downimg"><img src="~/Content/images/Carousel/娱乐.png" /></div>
 </div>    
     }
-<div style="background-color:#ffffff">
-    <div class="layui-form" style="padding-top:20px">
+
+<div id="NewsForm">
+    <div class="layui-form" id="form">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">新闻类别：</label>
@@ -31,7 +37,7 @@
             </div>
         </div>
     </div>
-    <table class="layui-table" id="newsTable"></table>
+    <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
 </div>
 
 
@@ -46,6 +52,7 @@
                     url: "@Url.Action("GetNewsList")",
                     page: true,
                     skin: 'nob',
+                    height: 480,
                     cols: [[
                         { field: 'NewsTitle', title: '新闻标题', width: '40%', align: 'center' },
                         { field: 'CategoryName', title: '新闻分类', width: '30%', align: 'center' },
@@ -63,6 +70,12 @@
                         }, //设定异步数据接口的额外参数
                         height: 480
                     });
+                });
+
+                //双击获取详情
+                table.on('rowDouble(newsTable)', function (obj) {                    
+                    var newsId = obj.data.NewsId;                   
+                    window.location = '/News/Detail?newId=' + newsId;
                 });
             })
         </script>

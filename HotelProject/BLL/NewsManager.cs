@@ -16,5 +16,10 @@ namespace BLL
         {
             return service.SelectNews(newCategory,page,limit);
         }
+
+        public News SelectNewsById(int newId)
+        {
+            return service.SelectNewsById(newId);
+        }
     }
 }

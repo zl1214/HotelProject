@@ -89,8 +89,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\Company.css" />
+    <Content Include="Content\CSS\Dishes.css" />
+    <Content Include="Content\CSS\Layout.css" />
+    <Content Include="Content\CSS\News.css" />
+    <Content Include="Content\CSS\NewsDetail.css" />
     <Content Include="Content\images\Carousel\地标.png" />
     <Content Include="Content\images\Carousel\娱乐.png" />
     <Content Include="Content\images\Carousel\轮播图1.png" />
@@ -101,6 +104,22 @@
     <Content Include="Content\images\Carousel\轮播图6.png" />
     <Content Include="Content\images\Carousel\轮播图7.png" />
     <Content Include="Content\images\Carousel\轮播图8.png" />
+    <Content Include="Content\images\Dishes\100.PNG" />
+    <Content Include="Content\images\Dishes\101.PNG" />
+    <Content Include="Content\images\Dishes\102.PNG" />
+    <Content Include="Content\images\Dishes\103.PNG" />
+    <Content Include="Content\images\Dishes\104.PNG" />
+    <Content Include="Content\images\Dishes\105.PNG" />
+    <Content Include="Content\images\Dishes\106.PNG" />
+    <Content Include="Content\images\Dishes\107.png" />
+    <Content Include="Content\images\Dishes\caipin01.jpg" />
+    <Content Include="Content\images\Dishes\caipin02.jpg" />
+    <Content Include="Content\images\Dishes\caipin03.jpg" />
+    <Content Include="Content\images\Dishes\caipin04.jpg" />
+    <Content Include="Content\images\Dishes\caipin05.jpg" />
+    <Content Include="Content\images\Dishes\caipin06.jpg" />
+    <Content Include="Content\images\Dishes\caipin07.jpg" />
+    <Content Include="Content\images\Dishes\caipin08.jpg" />
     <Content Include="Content\images\Head\地址.png" />
     <Content Include="Content\images\Head\标题.png" />
     <Content Include="Content\images\Head\秋天.jpg" />
@@ -210,21 +229,13 @@
     <Content Include="Content\layui\lay\modules\upload.js" />
     <Content Include="Content\layui\lay\modules\util.js" />
     <Content Include="Content\script\unobtrusive.js" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,15 +249,12 @@
     <Content Include="Content\layui\font\iconfont.ttf" />
     <Content Include="Content\layui\font\iconfont.woff" />
     <Content Include="Content\layui\font\iconfont.woff2" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -256,8 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\CSS\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
