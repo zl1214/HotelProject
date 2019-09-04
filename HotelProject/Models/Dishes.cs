@@ -11,13 +11,17 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Dishes
     {
         public int DishesId { get; set; }
         public string DishesName { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public int? CategoryId { get; set; }
+
+        [NotMapped]
+        public string DishesImg { get { return this.DishesId.ToString() + ".PNG"; }}
     
         public virtual DishesCategory DishesCategory { get; set; }
     }

@@ -1,0 +1,18 @@
+.layui-form-item {margin-bottom:0px
+}
+.layui-form {padding:20px 10px
+}
+
+.layui-elem-quote{padding:20px 20px;background-color:#534d4d;color:#FFFFFF;margin:10px auto 0px auto}
+#form {background-color: #FFFFFF;
+}
+#dishesList {background-color: #FFFFFF;float: left;width:100%
+}
+#dishes{width: 300px;height: 280px;padding:10px 10px;float: left;margin:10px auto 20px 42px;background-color:#F0F0F0 }
+#dishes img{width: 300px;height: 230px}
+#dishesName{float: left;width: 150px;text-align:center;font-size:20px;padding-top:15px}
+#UnitPrice{float: left;width: 150px;text-align:center;font-size:20px;padding-top:15px}
+.footer {float: left;width: 1140px; margin:10px 0px;
+}
+.CompanyName {margin:0px 10px;padding-left:10px
+}

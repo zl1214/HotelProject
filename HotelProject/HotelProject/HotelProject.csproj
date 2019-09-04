@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\Company.css" />
+    <Content Include="Content\CSS\Dishes.css" />
     <Content Include="Content\CSS\Layout.css" />
     <Content Include="Content\CSS\News.css" />
     <Content Include="Content\CSS\NewsDetail.css" />
@@ -103,6 +104,22 @@
     <Content Include="Content\images\Carousel\轮播图6.png" />
     <Content Include="Content\images\Carousel\轮播图7.png" />
     <Content Include="Content\images\Carousel\轮播图8.png" />
+    <Content Include="Content\images\Dishes\100.PNG" />
+    <Content Include="Content\images\Dishes\101.PNG" />
+    <Content Include="Content\images\Dishes\102.PNG" />
+    <Content Include="Content\images\Dishes\103.PNG" />
+    <Content Include="Content\images\Dishes\104.PNG" />
+    <Content Include="Content\images\Dishes\105.PNG" />
+    <Content Include="Content\images\Dishes\106.PNG" />
+    <Content Include="Content\images\Dishes\107.png" />
+    <Content Include="Content\images\Dishes\caipin01.jpg" />
+    <Content Include="Content\images\Dishes\caipin02.jpg" />
+    <Content Include="Content\images\Dishes\caipin03.jpg" />
+    <Content Include="Content\images\Dishes\caipin04.jpg" />
+    <Content Include="Content\images\Dishes\caipin05.jpg" />
+    <Content Include="Content\images\Dishes\caipin06.jpg" />
+    <Content Include="Content\images\Dishes\caipin07.jpg" />
+    <Content Include="Content\images\Dishes\caipin08.jpg" />
     <Content Include="Content\images\Head\地址.png" />
     <Content Include="Content\images\Head\标题.png" />
     <Content Include="Content\images\Head\秋天.jpg" />
@@ -218,6 +235,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,6 +254,7 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

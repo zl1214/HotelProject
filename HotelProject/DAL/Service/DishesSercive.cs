@@ -10,20 +10,18 @@ namespace DAL
 {
    public class DishesSercive
     {
+        
         //根据类别获取所有的菜品信息
-        public TableModel<object> GetAllDishes(int? categoryId)
+        public List<Dishes> GetAllDishes(int? categoryId)
         {
-            using (HotelDBEntities db=new HotelDBEntities())
+            using (HotelDBEntities db = new HotelDBEntities())
             {
                 var list = (from d in db.Dishes select d).ToList();
-                if (categoryId!=null)
+                if (categoryId != null)
                 {
                     list = (from s in list where s.CategoryId == categoryId select s).ToList();
                 }
-                TableModel<object> table = new TableModel<object>();
-                table.count = list.Count();
-                table.data = list.ToList<object>();
-                return table;
+                return list.ToList<Dishes>();
             }
         }
 
