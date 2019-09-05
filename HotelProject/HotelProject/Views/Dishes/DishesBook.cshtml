@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "在线预订";
+}
+
+@section CustomCss{
+    <link href="~/Content/CSS/DishesBook.css" rel="stylesheet" />
+}
+
+@section TopContent{
+
+    <blockquote class="layui-elem-quote"><h2>在线预订</h2></blockquote>
+
+}
+<div class="dishesBook">
+    <div class="leftshow">
+        <div class="dishesImg">
+            <img src="~/Content/images/Dishes/海边1.png" />
+            <img src="~/Content/images/Dishes/海边2.png" />
+        </div>
+    </div>
+<div class="form">
+    @using (Ajax.BeginForm("DishesBook", "Dishes", new AjaxOptions() { OnComplete = "ajaxComplete" }))
+    {
+
+        <div class="layui-form ">
+            <div class="layui-form-item">
+                <label class="layui-form-label">酒店名称：</label>
+                <div class="layui-input-inline">
+                    <select name="HotelName" lay-verify="required">
+                        <option selected value="">请选择就餐地点</option>
+                        <option value="深圳南山店">深圳南山店</option>
+                        <option value="深圳宝安店">深圳宝安店</option>
+                        <option value="深圳罗湖店">深圳罗湖店</option>
+                        <option value="深圳龙岗店">深圳龙岗店</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">您的消费时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="请选择消费时间" id="date" name="ConsumeTime" lay-verify="required" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">您的消费人数：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="请输入" name="ConsumePersons" lay-verify="required" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择就餐环境：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="RoomType" value="包间" title="包间">
+                    <input type="radio" name="RoomType" value="散座" title="散座" checked>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预订人姓名：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="请输入" name="CustomerName" lay-verify="required" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号码：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="请输入" name="CustomerPhone" lay-verify="required|phone" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电子邮件：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="请输入" name="CustomerEmail" />
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注事项：</label>
+                <div class="layui-input-inline">
+                    <textarea name="Comments" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit>马上预订</button>
+                </div>
+            </div>
+        </div>
+    }
+    </div>   
+</div>
+
+
+
+<script type="text/javascript">
+    layui.use(['form', 'laydate', 'jquery','layer'], function () {
+        var form = layui.form,
+            laydate = layui.laydate,
+            layer=layui.layer,
+            $ = layui.$;
+
+        laydate.render({
+            elem: '#date',
+            type: 'datetime'         
+           
+        });
+
+        window.ajaxComplete = function (data) {
+            var d = JSON.parse(data);
+            if (d.responseText == "1") {
+                layer.msg("预订成功！");
+            } else { layer.msg("预订失败");}
+        };
+    })
+</script>

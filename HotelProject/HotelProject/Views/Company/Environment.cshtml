@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "餐厅环境";
+}
+@section CustomCss{
+    <link href="~/Content/CSS/Environment.css" rel="stylesheet" />
+}
+
+@section TopContent{
+
+    <blockquote class="layui-elem-quote"><h2>餐厅环境</h2></blockquote>
+
+}
+<div id="Environment">
+    <div class="imglist">
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing01.jpg" />
+        </div>
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing02.jpg" />
+        </div>
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing03.jpg" />
+        </div>
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing04.jpg" />
+        </div>
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing05.jpg" />
+        </div>
+        <div class="imgitem">
+            <img lay-src="~/Content/images/Environment/huanjing06.jpg" />
+        </div>      
+        </div>
+</div>
+
+<script type="text/javascript">
+    layui.use('flow', function () {
+        var flow = layui.flow;
+
+        flow.lazyimg({
+            elem: '.imglist img'
+        });
+    });
+</script>

@@ -13,5 +13,10 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+
+        public ActionResult Environment()
+        {
+            return View();
+        }
     }
 }

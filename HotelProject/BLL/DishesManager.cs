@@ -12,9 +12,12 @@ namespace BLL
     {
         private DishesSercive service = new DishesSercive();
 
+        //获取菜品列表
         public List<Dishes> GetAllDishes(int? categoryId)
         {
             return service.GetAllDishes(categoryId);
         }
+
+       
     }
 }

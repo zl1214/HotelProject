@@ -12,16 +12,26 @@ namespace HotelProject.Controllers
     {
 
         private DishesManager manager = new DishesManager();
-        // GET: Dishes
+        private DishesBookMananger book = new DishesBookMananger();
+        
+        //菜品展示
         public ActionResult Index(int? categoryId)
         {
             ViewBag.DishesList = manager.GetAllDishes(categoryId);
             return View();
         }
-        public ActionResult SelectDishesById(int? categoryId)
+
+        public ActionResult DishesBook()
         {
-            ViewBag.DishesList = manager.GetAllDishes(categoryId);
-            return View("Index", ViewBag.DishesList);
+            return View();
+        }
+
+        [HttpPost]
+        //菜品预订
+        public ActionResult DishesBook(DishesBook dishes)
+        {
+            int res = book.DishesBook(dishes);
+            return Content(res.ToString());
         }
     }
 }
