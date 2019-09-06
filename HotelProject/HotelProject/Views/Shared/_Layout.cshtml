@@ -28,10 +28,9 @@
                     <li class="layui-nav-item"><a href="@Url.Action("Index","News")"><i class="layui-icon layui-icon-website">新闻动态</i></a></li>
                     <li class="layui-nav-item"><a href="@Url.Action("Index","Dishes")"><i class="layui-icon layui-icon-carousel">美食展示</i></a></li>
                     <li class="layui-nav-item"><a href="@Url.Action("Environment","Company")"><i class="layui-icon layui-icon-tree">餐厅环境</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("JoinUs","Company")"><i class="layui-icon layui-icon-util">加盟连锁</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("Suggestions", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("RecruitmentList", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a></li>                
+                    <li class="layui-nav-item"><a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a></li>                    
+                    <li class="layui-nav-item"><a href="@Url.Action("Suggestion", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a></li>
+                    <li class="layui-nav-item"><a href="@Url.Action("Recruitment", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a></li>                
                 </ul>
             </div>
         </div>
@@ -46,19 +45,18 @@
 
     </div>
                    
-           
-               
-    
+    <script type="text/javascript">
+        layui.config({
+            base: '/Content/script/'
+        }).extend({
+            unobtrusive: 'unobtrusive',
+        });
+    </script>  
+      
     <script type="text/javascript">
         layui.use(['element','jquery'], function () {
             var element = layui.element,
                 $=layui.$;
-
-            $("[data-type='menu']").click(function () {
-                var href =$(this).attr("data-href");
-                $('#main_content').attr("src", href);
-            });
-
         });
     </script>    
 </body>

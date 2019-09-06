@@ -30,6 +30,7 @@ namespace HotelProject.Controllers
         //菜品预订
         public ActionResult DishesBook(DishesBook dishes)
         {
+            dishes.BookTime = DateTime.Now;
             int res = book.DishesBook(dishes);
             return Content(res.ToString());
         }

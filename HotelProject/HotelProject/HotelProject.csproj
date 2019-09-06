@@ -96,6 +96,7 @@
     <Content Include="Content\CSS\Layout.css" />
     <Content Include="Content\CSS\News.css" />
     <Content Include="Content\CSS\NewsDetail.css" />
+    <Content Include="Content\CSS\RecruitmentDetail.css" />
     <Content Include="Content\images\Carousel\地标.png" />
     <Content Include="Content\images\Carousel\娱乐.png" />
     <Content Include="Content\images\Carousel\轮播图1.png" />
@@ -268,6 +269,9 @@
     <Content Include="Views\Dishes\Index.cshtml" />
     <Content Include="Views\Company\Environment.cshtml" />
     <Content Include="Views\Dishes\DishesBook.cshtml" />
+    <Content Include="Views\Company\Suggestion.cshtml" />
+    <Content Include="Views\Company\Recruitment.cshtml" />
+    <Content Include="Views\Company\RecruitmentDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -20,7 +20,7 @@
         </div>
     </div>
 <div class="form">
-    @using (Ajax.BeginForm("DishesBook", "Dishes", new AjaxOptions() { OnComplete = "ajaxComplete" }))
+    @using (Ajax.BeginForm("DishesBook", "Dishes", new AjaxOptions() { OnSuccess = "ajaxComplete" }))
     {
 
         <div class="layui-form ">
@@ -92,10 +92,11 @@
 
 
 <script type="text/javascript">
-    layui.use(['form', 'laydate', 'jquery','layer'], function () {
+    layui.use(['form', 'laydate', 'jquery', 'layer', 'unobtrusive'], function () {
         var form = layui.form,
             laydate = layui.laydate,
-            layer=layui.layer,
+            layer = layui.layer,
+            unobtrusive = layui.unobtrusive,
             $ = layui.$;
 
         laydate.render({
@@ -105,9 +106,9 @@
         });
 
         window.ajaxComplete = function (data) {
-            var d = JSON.parse(data);
-            if (d.responseText == "1") {
+            if (data == "1") {
                 layer.msg("预订成功！");
+                setTimeout(" window.location='/Company/Index'", "2000");
             } else { layer.msg("预订失败");}
         };
     })
