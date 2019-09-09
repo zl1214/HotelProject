@@ -49,7 +49,7 @@ namespace DAL
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                var list = from n in db.News select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId };
+                var list = from n in db.News select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId,n.NewsContents };
                 if (newCategory!=null)
                 {
                     list = from n in list where n.CategoryId == newCategory select n;

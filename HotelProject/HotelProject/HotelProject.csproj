@@ -241,11 +241,19 @@
     <Content Include="Content\layui\lay\modules\upload.js" />
     <Content Include="Content\layui\lay\modules\util.js" />
     <Content Include="Content\script\unobtrusive.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\DishesBookController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\DishesController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\HomeController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\NewsController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\RecruitmentController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\SuggestionController.cs" />
+    <Compile Include="Areas\HotelManager\HotelManagerAreaRegistration.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -272,6 +280,12 @@
     <Content Include="Views\Company\Suggestion.cshtml" />
     <Content Include="Views\Company\Recruitment.cshtml" />
     <Content Include="Views\Company\RecruitmentDetail.cshtml" />
+    <Content Include="Areas\HotelManager\Views\web.config" />
+    <Content Include="Areas\HotelManager\Views\Home\Index.cshtml" />
+    <Content Include="Areas\HotelManager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HotelManager\Views\News\Index.cshtml" />
+    <Content Include="Areas\HotelManager\Views\News\Creat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -281,6 +295,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HotelManager\Models\" />
+    <Folder Include="Areas\HotelManager\Views\DishesBook\" />
+    <Folder Include="Areas\HotelManager\Views\Dishes\" />
+    <Folder Include="Areas\HotelManager\Views\Recruitment\" />
+    <Folder Include="Areas\HotelManager\Views\Suggestion\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

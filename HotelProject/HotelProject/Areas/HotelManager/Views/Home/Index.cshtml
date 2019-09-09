@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>深圳瑞吉酒店后台管理</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">深圳瑞吉酒店后台管理</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                        @ViewBag.AdminName
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-type="menu" data-href="@Url.Action("Index","Dishes")">基本资料</a></dd>
+                        <dd><a data-type="menu" data-href="@Url.Action("Index","Dishes")">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">退了</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a data-type="menu" data-href="@Url.Action("Index","Dishes")">菜品管理</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a data-type="menu" data-href="@Url.Action("Index","DishesBook")">预订管理</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a data-type="menu" data-href="@Url.Action("Index","News")">新闻管理</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a data-type="menu" data-href="@Url.Action("Index","Suggestion")">投诉管理</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a data-type="menu" data-href="@Url.Action("Index","Recruitment")">招聘管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body" style="overflow:hidden">
+            <!-- 内容主体区域 -->
+            <iframe id="main_content" frameborder="0" style="width:100%;height:100%"></iframe>
+        </div>
+
+        <div class="layui-footer">
+
+        </div>
+    </div>
+
+    //JavaScript代码区域
+    <script type="text/javascript">
+
+        layui.use(['element','jquery'], function () {
+            var element = layui.element,
+                $ = layui.$;
+
+            $("[data-type='menu']").click(function () {
+                var href = $(this).attr("data-href");
+                $('#main_content').attr("src",href);
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "新闻管理";
+}
+
+<div style="margin:0px 10px ">
+    <table id="newsTable"></table>
+</div>
+
+
+<script type="text/javascript">
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#newsTable',
+            url: '@Url.Action("GetAllNews")',
+            page: true,
+            toolbar: 'default',
+            cols: [[
+                { type: 'checkbox', width: '8%', align: 'center' },
+                { type: 'numbers', title: '序号', width: '8%', align: 'center' },
+                { field: 'NewsTitle', title: '新闻标题', width: '16%', align: 'center' },
+                { field: 'NewsContents', title: '新闻简介', width: '38%', align: 'center' },
+                { field: 'CategoryName', title: '新闻分类', width: '10%', align: 'center' },
+                { field: 'PublishTime', title: '发布时间',  align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+             
+            ]]
+        })
+
+    })
+</script>
+

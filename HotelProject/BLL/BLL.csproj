@@ -41,9 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DishesBookMananger.cs" />
-    <Compile Include="DishesCategoryManager.cs" />
     <Compile Include="DishesManager.cs" />
-    <Compile Include="NewsCategoryManager.cs" />
     <Compile Include="NewsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecruitmentManager.cs" />
