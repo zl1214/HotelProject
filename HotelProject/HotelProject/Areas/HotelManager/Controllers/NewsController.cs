@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
@@ -22,6 +23,18 @@ namespace HotelProject.Areas.HotelManager.Controllers
         {
             var list = manager.GetAllNews(null, page, limit);
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Creat()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Creat(News objnew)
+        {
+            int res = manager.AddNews(objnew);
+            return Content(res.ToString());
         }
     }
 }

@@ -44,12 +44,12 @@ namespace DAL
             }
         }
 
-        //按照id,类别分页查询新闻
+        //按照类别，时间倒序分页查询新闻
         public TableModel<object> SelectNews(int? newCategory, int page, int limit)
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                var list = from n in db.News select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId,n.NewsContents };
+                var list = from n in db.News orderby n.PublishTime descending select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId,n.NewsContents };
                 if (newCategory!=null)
                 {
                     list = from n in list where n.CategoryId == newCategory select n;
