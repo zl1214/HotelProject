@@ -54,7 +54,7 @@
 
         <div class="layui-body" style="overflow:hidden">
             <!-- 内容主体区域 -->
-            <iframe id="main_content" frameborder="0" style="width:100%;height:100%"></iframe>
+            <iframe id="main_content" name="main_content" frameborder="0" style="width:100%;height:100%"></iframe>
         </div>
 
         <div class="layui-footer">
@@ -65,8 +65,9 @@
     //JavaScript代码区域
     <script type="text/javascript">
 
-        layui.use(['element','jquery'], function () {
+        layui.use(['element','jquery','layer'], function () {
             var element = layui.element,
+                layer=layui.layer,
                 $ = layui.$;
 
             $("[data-type='menu']").click(function () {

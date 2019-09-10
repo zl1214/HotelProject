@@ -29,5 +29,17 @@ namespace BLL
         {
             return service.AddNews(news);
         }
+
+        //修改新闻
+        public int UpdateNews(News news)
+        {
+            return service.ModifyNews(news);
+        }
+
+        //删除新闻
+        public int DeleteNews(int[] num)
+        {
+            return service.DeleteNews(num);
+        }
     }
 }

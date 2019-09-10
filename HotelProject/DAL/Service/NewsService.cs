@@ -49,7 +49,7 @@ namespace DAL
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                var list = from n in db.News orderby n.PublishTime descending select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId,n.NewsContents };
+                var list = from n in db.News select new { n.NewsId, n.NewsTitle, n.PublishTime, n.NewsCategory.CategoryName,n.CategoryId,n.NewsContents };
                 if (newCategory!=null)
                 {
                     list = from n in list where n.CategoryId == newCategory select n;
@@ -57,7 +57,7 @@ namespace DAL
                 
                 TableModel<object> table = new TableModel<object>();
                 table.count = list.Count();
-                table.data = list.OrderBy(s=>s.NewsId).Skip((page-1)*limit).Take(limit).ToList<object>();
+                table.data = list.OrderByDescending(s=>s.PublishTime).Skip((page-1)*limit).Take(limit).ToList<object>();
                 return table;
             }
         }

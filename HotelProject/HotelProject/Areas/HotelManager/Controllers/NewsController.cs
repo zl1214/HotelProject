@@ -25,16 +25,42 @@ namespace HotelProject.Areas.HotelManager.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        //页面跳转到新闻发布
         public ActionResult Creat()
         {
             return View();
         }
 
+        //新闻发布动作方法
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Creat(News objnew)
         {
+            objnew.PublishTime = DateTime.Now;
             int res = manager.AddNews(objnew);
             return Content(res.ToString());
+        }
+
+        //页面跳转只修改页面
+        public ActionResult Update(int newsId)
+        {  
+            ViewBag.NewsId = newsId;
+            return View();
+        }
+
+
+        public ActionResult SelectNewsById(int newsId)
+        {
+            var objNew = manager.SelectNewsById(newsId);
+            return Json(objNew,JsonRequestBehavior.AllowGet);
+        }
+
+        //修改新闻的动作方法
+        [HttpPost]
+        public ActionResult Update(News objnew)
+        {
+
+            return View();
         }
     }
 }
