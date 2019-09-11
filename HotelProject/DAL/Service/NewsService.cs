@@ -27,7 +27,7 @@ namespace DAL
             {
                 for (int i = 0; i < newId.Length; i++)
                 {
-                    News news = new News() { NewsId=i};
+                    News news = new News() { NewsId= newId [i]};
                     db.Entry<News>(news).State = EntityState.Deleted;                    
                 }
                 return db.SaveChanges();
@@ -39,7 +39,12 @@ namespace DAL
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                db.Entry<News>(news).State = EntityState.Modified;
+                News obj = new News();
+                obj.NewsId = news.NewsId;                          
+                db.News.Attach(obj);
+                obj.CategoryId = news.CategoryId;
+                obj.NewsTitle = news.NewsTitle;
+                obj.NewsContents = news.NewsContents;
                 return db.SaveChanges();
             }
         }
@@ -63,11 +68,11 @@ namespace DAL
         }
 
         //按照id查询新闻详细信息
-        public News SelectNewsById(int newId)
+        public object SelectNewsById(int newId)
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                return (from n in db.News where n.NewsId == newId select n).FirstOrDefault();
+                return (from n in db.News where n.NewsId == newId select new { n.NewsId, n.NewsTitle, n.PublishTime,n.CategoryId, n.NewsContents }).FirstOrDefault();
             }
         }
     }

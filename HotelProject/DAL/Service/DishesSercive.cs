@@ -16,12 +16,23 @@ namespace DAL
         {
             using (HotelDBEntities db = new HotelDBEntities())
             {
-                var list = (from d in db.Dishes select d).ToList();
+                var list = from d in db.Dishes select new { d.CategoryId,d.DishesCategory.CategoryName,d.DishesId,d.DishesName,d.UnitPrice};
                 if (categoryId != null)
                 {
-                    list = (from s in list where s.CategoryId == categoryId select s).ToList();
+                    list = from s in list where s.CategoryId == categoryId select s;
                 }
-                return list.ToList<Dishes>();
+                List<Dishes> dishesList = new List<Dishes>();
+                foreach (var item in list)
+                {
+                    dishesList.Add(new Dishes() {
+                        CategoryId=item.CategoryId,
+                        DishesId=item.DishesId,
+                        DishesName=item.DishesName,
+                        UnitPrice=item.UnitPrice,
+                        DishesCategory=new DishesCategory { CategoryName=item.CategoryName}
+                    });
+                }
+                return dishesList;
             }
         }
 
@@ -62,11 +73,11 @@ namespace DAL
         }
         
         //根据菜品Id获取菜品信息
-        public Dishes GetDishesById(int dishesId)
+        public object GetDishesById(int dishesId)
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                return (from d in db.Dishes where d.DishesId == dishesId select d).FirstOrDefault();
+                return (from d in db.Dishes where d.DishesId == dishesId select new { d.CategoryId, d.DishesCategory.CategoryName, d.DishesId, d.DishesImg, d.DishesName }).FirstOrDefault();
             }
         }
     }

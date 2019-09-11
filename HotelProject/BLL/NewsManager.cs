@@ -19,7 +19,7 @@ namespace BLL
         }
 
         //根据新闻Id获取新闻
-        public News SelectNewsById(int newId)
+        public object SelectNewsById(int newId)
         {
             return service.SelectNewsById(newId);
         }

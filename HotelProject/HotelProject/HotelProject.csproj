@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HotelManager\CSS\Dishes.css" />
     <Content Include="Content\CSS\Company.css" />
     <Content Include="Content\CSS\Dishes.css" />
     <Content Include="Content\CSS\DishesBook.css" />
@@ -467,7 +468,6 @@
     <Content Include="Views\Company\Recruitment.cshtml" />
     <Content Include="Views\Company\RecruitmentDetail.cshtml" />
     <Content Include="Areas\HotelManager\Views\web.config" />
-    <Content Include="Areas\HotelManager\Views\Home\Index.cshtml" />
     <Content Include="Areas\HotelManager\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HotelManager\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HotelManager\Views\News\Index.cshtml" />
@@ -481,6 +481,8 @@
     <Content Include="ThirdFile\ckeditor\README.md" />
     <Content Include="ThirdFile\ckeditor\skins\moono\readme.md" />
     <Content Include="Areas\HotelManager\Views\News\Update.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Home\Index.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Dishes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -492,7 +494,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HotelManager\Models\" />
     <Folder Include="Areas\HotelManager\Views\DishesBook\" />
-    <Folder Include="Areas\HotelManager\Views\Dishes\" />
     <Folder Include="Areas\HotelManager\Views\Recruitment\" />
     <Folder Include="Areas\HotelManager\Views\Suggestion\" />
   </ItemGroup>

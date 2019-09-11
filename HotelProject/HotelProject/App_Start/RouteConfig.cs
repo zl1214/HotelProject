@@ -15,8 +15,9 @@ namespace HotelProject
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Company", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}",                
+                defaults: new { controller = "Company", action = "Index", id = UrlParameter.Optional },
+                namespaces:new string[] { "HotelProject.Controllers" }
             );
         }
     }

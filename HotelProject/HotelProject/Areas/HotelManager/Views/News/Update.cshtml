@@ -25,20 +25,21 @@
                 </div>
             </div>
 
-            @*<div class="layui-form-item">
+            <div class="layui-form-item">
                 <label class="layui-form-label">新闻内容</label>
                 <div class="layui-input-inline" style="width:700px">
                     <textarea name="NewsContents" id="NewsContents"></textarea>
                 </div>
-            </div>*@
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit>修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
                     
                 </div>
             </div>
+            <input id="NewsId" name="NewsId" type="hidden" value="@ViewBag.NewsId" />
         </div>
-        <input id="NewsId" type="hidden" value="@ViewBag.NewsId" />
+       
     }
     
 </div>
@@ -52,19 +53,33 @@
 
         //表单赋值
         var NewsId=$('#NewsId').val();
-        $.get("@Url.Action("SelectNewsById")", { newsId: NewsId }, function (res) {
-            debugger
+        $.get("@Url.Action("SelectNewsById")", { newsId: NewsId }, function (res) {            
             form.val('newsForm', {
-                'CategoryId':res[0].CategoryId,
-                'NewsTitle': res[0].NewsTitle,
-                //'NewsContents': res[0].NewsContents
+                'CategoryId': res.CategoryId,
+                'NewsTitle': res.NewsTitle,
+                'NewsContents': res.NewsContents
             });
-        })
+        });
 
+        //弹窗关闭
+        window.Closelayer = function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        };
+
+        window.submitComplete = function (res) {
+            debugger
+            if (res.responseText == "1") {
+                layer.msg("修改成功！");
+                top["main_content"].refreshTable();
+                Closelayer();
+            }
+            else { layer.msg("修改失败！"); }
+        };
 
     });
 </script>
 
-@*<script type="text/javascript">
+<script type="text/javascript">
     CKEDITOR.replace("NewsContents");
-</script>*@
+</script>

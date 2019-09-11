@@ -17,7 +17,8 @@ namespace HotelProject.Areas.HotelManager
             context.MapRoute(
                 "HotelManager_default",
                 "HotelManager/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+               new string[] { "HotelProject.Areas.HotelManager.Controllers" }
             );
         }
     }

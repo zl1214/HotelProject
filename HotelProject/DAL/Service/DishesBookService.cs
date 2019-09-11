@@ -35,13 +35,14 @@ namespace DAL
         }
 
         //订单通过（OrderStatus=1）/关闭订单（OrderStatus=-1）
-        public int UpdateDishesBook(int dishesId,int orderStatus)
+        public int UpdateDishesBook(int bookId,int orderStatus)
         {
             using (HotelDBEntities db = new HotelDBEntities())
             {
                 DishesBook book = new DishesBook();
-                book.OrderStatus = orderStatus;
+                book.BookId = bookId;
                 db.DishesBook.Attach(book);
+                book.OrderStatus = orderStatus;
                 return db.SaveChanges();
             }
         }

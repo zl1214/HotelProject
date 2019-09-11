@@ -9,12 +9,13 @@ namespace HotelProject.Areas.HotelManager.Controllers
 {
     public class DishesController : Controller
     {
-       
+        private DishesManager manager = new DishesManager();
 
         // GET: HotelManager/Dishes
         //页面跳转
-        public ActionResult Index()
+        public ActionResult Index(int? categoryId)
         {
+            ViewBag.DishesList = manager.GetAllDishes(categoryId);
             return View();
         }
 

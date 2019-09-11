@@ -57,10 +57,18 @@ namespace HotelProject.Areas.HotelManager.Controllers
 
         //修改新闻的动作方法
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Update(News objnew)
         {
+            int res = manager.UpdateNews(objnew);
+            return Content(res.ToString());
+        }
 
-            return View();
+        //批量删除新闻
+        public ActionResult Delete(int[] num)
+        {
+            int res = manager.DeleteNews(num);
+            return Content(res.ToString());
         }
     }
 }
