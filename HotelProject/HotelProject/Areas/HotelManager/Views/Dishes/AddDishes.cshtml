@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "添加菜品";
+}
+<div class="form">
+    @using (Ajax.BeginForm("PublishDishes", "Dishes", new AjaxOptions() { OnComplete = "submit" }))
+    {
+        <div class="layui-form" >
+            <div class="layui-form-item" style="margin-top:20px">
+                <div class="layui-inline">
+                    <label class="layui-form-label">菜名：</label>
+                    <div class="layui-input-inline" ><input id="DishesName"name="DishesName" type="text" class="layui-input" placeholder="请输入名称" lay-verify="required"/></div>
+                    <label class="layui-form-label">价格：</label>
+                    <div class="layui-input-inline"><input id="UnitPrice" name="UnitPrice" type="text" class="layui-input" placeholder="请输入价格" lay-verify="required" /></div>
+                    <label class="layui-form-label">菜系：</label>
+                    <div class="layui-input-inline">
+                        <select id="CategoryId" name="CategoryId">
+                            <option selected="" value="">请选择类别</option>
+                            <option value="1">川菜</option>
+                            <option value="2">湘菜</option>
+                            <option value="3">鲁菜</option>
+                            <option value="4">海鲜类</option>
+                            <option value="5">其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>   
+             
+            <div class="layui-form-item" style="margin:10px 0px 10px 110px">               
+                <div class="layui-inline">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
+                   
+            <div class="layui-form-item" style="margin:10px 0px 10px 110px">
+                <div class="layui-inline">
+                    <div class="layui-upload-drag" id="test10" >
+                        <i class="layui-icon"></i>
+                        <p>点击上传，或将文件拖拽到此处</p>
+                    </div>
+                    <button class="layui-btn" id="UploadImg" >上&nbsp;&nbsp;&nbsp;&nbsp;传</button>
+                </div>
+            </div>
+           
+        </div>
+    }
+   
+</div>
+
+<script type="text/javascript">
+    layui.use(['form', 'upload'], function () {
+        var form = layui.form,
+            upload = layui.upload;
+
+        
+
+        //拖拽上传
+        upload.render({
+            elem: '#test10',
+            url: '@Url.Action("UploadImg")',
+            data:{},
+            size: 2048,
+            auto: false,
+            bindAction: '#UploadImg',
+            acceptMime: 'image/*',
+            choose: function(obj){
+                //将每次选择的文件追加到文件队列
+                var files = obj.pushFile();
+    
+                //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                obj.preview(function(index, file, result){
+                    console.log(index); //得到文件索引
+                    console.log(file); //得到文件对象
+                    console.log(result); //得到文件base64编码，比如图片
+                })},
+            before: function(obj){
+      //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    
+        $('#demo1').attr('src', result); //图片链接（base64）
+      });
+    },
+            done: function (res) {
+              console.log(res)
+          }
+        });
+
+
+
+    })
+</script>
+

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
@@ -19,6 +20,26 @@ namespace HotelProject.Areas.HotelManager.Controllers
             return View();
         }
 
-       
+        public ActionResult AddDishes()
+        {
+            return View();
+        }
+
+        //public ActionResult UploadImg(Dishes dish)
+        //{
+        //     var file = Request.Files[0];
+        //    int dishesId = manager.ReturuDishesId(dish);
+        //    return Json(file, JsonRequestBehavior.AllowGet);
+               
+        //}
+
+        //public ActionResult PublishDishes(Dishes dish)
+        //{
+           
+            
+           
+        //    return Content(dishesId.ToString());
+        //}
+
     }
 }

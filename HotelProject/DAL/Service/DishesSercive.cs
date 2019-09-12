@@ -80,5 +80,16 @@ namespace DAL
                 return (from d in db.Dishes where d.DishesId == dishesId select new { d.CategoryId, d.DishesCategory.CategoryName, d.DishesId, d.DishesImg, d.DishesName }).FirstOrDefault();
             }
         }
+
+        //添加菜品返回菜品的ID
+        public int ReturuDishesId(Dishes dish)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                db.Dishes.Add(dish);
+                db.SaveChanges();
+                return dish.DishesId;//返回标识列的值
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title</title>
     <script src="~/Content/layui/layui.js"></script>
     <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    @RenderSection("css",false)
 </head>
 <body>   
         @RenderBody()
@@ -20,9 +21,7 @@
 
     <script type="text/javascript">
         layui.use('layer', function () {
-
-            var layer = layui.layer;
-        })
+            var layer = layui.layer;        })
     </script>
 </body>
 </html>

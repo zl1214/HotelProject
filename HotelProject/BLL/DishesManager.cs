@@ -18,6 +18,10 @@ namespace BLL
             return service.GetAllDishes(categoryId);
         }
 
-       
+        //添加菜品返回菜品id
+        public int ReturuDishesId(Dishes dish)
+        {
+            return service.ReturuDishesId(dish);
+        }
     }
 }
