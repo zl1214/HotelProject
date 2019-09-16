@@ -21,8 +21,8 @@ namespace Models
         public int? CategoryId { get; set; }
 
         [NotMapped]
-        public string DishesImg { get { return this.DishesId.ToString() + ".PNG"; }}
-    
+        public string DishesImg { get { return this.DishesId.ToString() + ".PNG"; }}       
+
         public virtual DishesCategory DishesCategory { get; set; }
     }
 }

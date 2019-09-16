@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HotelManager\CSS\AddDishes.css" />
     <Content Include="Areas\HotelManager\CSS\DishesList.css" />
     <Content Include="Content\CSS\Company.css" />
     <Content Include="Content\CSS\Dishes.css" />
@@ -116,6 +117,7 @@
     <Content Include="Content\images\Dishes\105.PNG" />
     <Content Include="Content\images\Dishes\106.PNG" />
     <Content Include="Content\images\Dishes\107.png" />
+    <Content Include="Content\images\Dishes\113.png" />
     <Content Include="Content\images\Dishes\caipin01.jpg" />
     <Content Include="Content\images\Dishes\caipin02.jpg" />
     <Content Include="Content\images\Dishes\caipin03.jpg" />
