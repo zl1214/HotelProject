@@ -73,11 +73,13 @@ namespace DAL
         }
         
         //根据菜品Id获取菜品信息
-        public object GetDishesById(int dishesId)
+        public Dishes GetDishesById(int dishesId)
         {
             using (HotelDBEntities db=new HotelDBEntities())
             {
-                return (from d in db.Dishes where d.DishesId == dishesId select new { d.CategoryId, d.DishesCategory.CategoryName, d.DishesId, d.DishesImg, d.DishesName }).FirstOrDefault();
+                var obj= (from d in db.Dishes where d.DishesId == dishesId select d).FirstOrDefault();
+                Dishes dishes = new Dishes() {CategoryId=obj.CategoryId,DishesId=obj.DishesId,DishesName=obj.DishesName,UnitPrice=obj.UnitPrice };
+                return dishes;
             }
         }
 

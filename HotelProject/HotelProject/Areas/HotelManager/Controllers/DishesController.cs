@@ -13,14 +13,20 @@ namespace HotelProject.Areas.HotelManager.Controllers
     {
         private DishesManager manager = new DishesManager();
 
-        // GET: HotelManager/Dishes
+        #region 菜品展示及异步分类查询
         //页面跳转
         public ActionResult Index(int? categoryId)
         {
             ViewBag.DishesList = manager.GetAllDishes(categoryId);
+            if (Request.IsAjaxRequest())
+            {
+                return View("DishesList", ViewBag.DishesList);
+            }            
             return View();
         }
+        #endregion
 
+        #region 添加菜品
         public ActionResult AddDishes()
         {
             return View();
@@ -57,13 +63,30 @@ namespace HotelProject.Areas.HotelManager.Controllers
                 if (fi.Exists)
                 {
                     string modeifySrc = "~/Content/images/Dishes/" + dishesId.ToString() + ".png";
-                    fi.MoveTo(Server.MapPath(modeifySrc));                    
+                    fi.MoveTo(Server.MapPath(modeifySrc));
+                    src = null;               
                 }               
                 return Content("1");
 
             }
             else { return Content("0"); }
         }
+        #endregion
+
+        #region 修改菜品
+
+        public ActionResult ModifyDishes(int dishesId)
+        {
+            ViewBag.dishesId = dishesId;
+            return View();
+        }
+
+        public ActionResult SelectDishesById(int dishesId)
+        {
+            Dishes dish = manager.GetDishesById(dishesId);
+            return Json(dish,JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
     }
 }

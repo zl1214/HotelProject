@@ -40,9 +40,9 @@
                 <div id="dishesName">菜名：@item.DishesName</div>
                 <div id="UnitPrice">价格：￥@item.UnitPrice</div>
                 <div id="Category">分类：@item.DishesCategory.CategoryName</div>
-                <div id="btn1"><button class="layui-btn layui-btn-sm  layui-btn-normal" id="btnModify" >修 &nbsp;&nbsp;改</button></div>
-                <div id="btn2"><button class="layui-btn layui-btn-sm layui-btn-danger" id="btnDelete">删 &nbsp;&nbsp;除</button></div>
-            </div>
+                <div id="btn1"><button class="layui-btn layui-btn-sm layui-btn-normal" data-dishid="@item.DishesId" id="modify">修 &nbsp;&nbsp;改</button></div>
+                <div id="btn2"><button class="layui-btn layui-btn-sm layui-btn-danger" id="deletebtn">删 &nbsp;&nbsp;除</button></div>                             
+            </div>            
         }
     </div>
 </div>
@@ -54,20 +54,51 @@
             layer=top.layer,
             $=layui.$;
 
+        //菜品查询
         $('#queryDishes').click(function () {
             var CategoryId = $('#CategoryId').val();
-            window.location = "/HotelManager/Dishes/Index?categoryId=" + CategoryId;
+            //window.location = "/HotelManager/Dishes/Index?categoryId=" + CategoryId;
+            $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                $('#dishesList').html(res);
+            });
         });
 
+        //菜品添加
         $('#addDishes').click(function () {
             layer.open({
                 type: 2,
                 title: "菜品添加",
                 area: ['800px', '400px'],
                 offset: 'auto',
-                content: ['/HotelManager/Dishes/AddDishes', 'no']
+                content: ['/HotelManager/Dishes/AddDishes', 'no'],
+                end: function () {
+                    var CategoryId = $('#CategoryId').val();
+                    $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                        $('#dishesList').html(res);
+                    });
+                }
             });
         });
+
+        
+        //修改菜品
+        $('.layui-btn-normal').click(function () {
+            var dishesId = $(this).attr("data-dishid");
+            layer.open({
+                type: 2,
+                title: "修改菜品",
+                area: ['800px', '400px'],
+                offset: 'auto',
+                content: ['/HotelManager/Dishes/ModifyDishes?dishesId=' + dishesId, 'no'],
+                end: function () {
+                    var CategoryId = $('#CategoryId').val();
+                    $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                        $('#dishesList').html(res);
+                    });
+                }
+            });
+        });
+
     })
 </script>
 

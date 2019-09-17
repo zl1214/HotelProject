@@ -23,5 +23,11 @@ namespace BLL
         {
             return service.ReturuDishesId(dish);
         }
+
+        //根据菜品id获取菜品信息
+        public Dishes GetDishesById(int dishesId)
+        {
+            return service.GetDishesById(dishesId);
+        }
     }
 }

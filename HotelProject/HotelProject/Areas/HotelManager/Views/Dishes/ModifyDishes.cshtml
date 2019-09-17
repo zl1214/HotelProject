@@ -1,20 +1,21 @@
 ﻿
+
 @{
-    ViewBag.Title = "添加菜品";
+    ViewBag.Title = "修改菜品";
 }
 
 @section css{
     <link href="~/Areas/HotelManager/CSS/AddDishes.css" rel="stylesheet" />
 }
 <div class="form">
-    @using (Ajax.BeginForm("PublishDishes", "Dishes", new AjaxOptions() { OnComplete = "submit" }))
+    @using (Ajax.BeginForm("", "Dishes", new AjaxOptions() { OnComplete = "submit" }))
     {
-        <div class="layui-form">
+        <div class="layui-form" lay-filter="dishes">
             <div class="layui-form-item">
-                <div class="layui-upload">                   
+                <div class="layui-upload">
                     <img class="layui-upload-img" id="demo1" style="width:200px;height:200px;">
                     <div class="layui-upload-list">
-                        <button type="button" class="layui-btn" id="test1">上传图片</button>
+                        <button type="button" class="layui-btn" id="test1">修改图片</button>
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">菜系：</label>
                     <div class="layui-input-inline">
-                        <select id="CategoryId" name="CategoryId"size="3">
+                        <select id="CategoryId" name="CategoryId" size="3">
                             <option selected="" value="">请选择类别</option>
                             <option value="1">川菜</option>
                             <option value="2">湘菜</option>
@@ -44,24 +45,36 @@
                         </select>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="layui-form-item">
                 <div class="layui-inline" id="btn">
-                    <button class="layui-btn" id="PublishDishes" lay-submit>添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+                    <button class="layui-btn" id="PublishDishes" lay-submit>修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
                 </div>
             </div>
+            <input type="hidden"id="DishesId" value="@ViewBag.dishesId"/>
         </div>
     }
 
-    </div>
+</div>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
         layui.use(['form', 'upload', 'jquery', 'unobtrusive'], function () {
             var form = layui.form,
                 $ = layui.$,
                 unobtrusive = layui.unobtrusive,
                 upload = layui.upload;
+
+            //表单初始化
+            var dishesId=$('#DishesId').val();
+            $.post("@Url.Action("SelectDishesById")",{dishesId:dishesId},function(res){
+                form.val("dishes", {
+                    "DishesName":res.DishesName,
+                    "UnitPrice":res.UnitPrice,
+                    "CategoryId":res.CategoryId,
+                   "img[src]":"~/Content/images/Dishes/"+res.DishesId+".png",
+            });
+            })
 
 
             //图片上传
@@ -92,9 +105,10 @@
                 if (res.responseText == "1") {
                      layer.msg("添加成功");
                      setTimeout("Closelayer()", "1000")
-                  
+
                 }
             }
 
         })
-    </script>
+</script>
+

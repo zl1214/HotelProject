@@ -486,6 +486,8 @@
     <Content Include="Areas\HotelManager\Views\Home\Index.cshtml" />
     <Content Include="Areas\HotelManager\Views\Dishes\Index.cshtml" />
     <Content Include="Areas\HotelManager\Views\Dishes\AddDishes.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Dishes\DishesList.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Dishes\ModifyDishes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
