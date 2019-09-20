@@ -1,8 +1,8 @@
-﻿.form{margin:20px 10px}
-#test1{margin-left:100px}
+﻿.form{margin:30px 10px}
 .layui-form{width:760px}
 .layui-form-item{float:left;width:380px;clear:none;}
-.layui-upload{margin-left:20px}
+.layui-upload{margin-left:50px}
+#test1{margin-left:100px}
 #PublishDishes{margin:20px 0px 0px 220px;}
-#btn{padding-top:16px}
+#btn{padding-top:26px}
 .layui-form-select dl { max-height:120px; }
