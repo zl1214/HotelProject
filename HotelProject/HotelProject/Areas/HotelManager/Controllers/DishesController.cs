@@ -62,7 +62,7 @@ namespace HotelProject.Areas.HotelManager.Controllers
                 FileInfo fi = new FileInfo(src);
                 if (fi.Exists)
                 {
-                    string modeifySrc = "~/Content/images/Dishes/" + dishesId.ToString() + ".png";
+                    string modeifySrc = "~/Content/images/Dishes/" + dishesId.ToString() + ".PNG";
                     fi.MoveTo(Server.MapPath(modeifySrc));
                     src = null;               
                 }               
