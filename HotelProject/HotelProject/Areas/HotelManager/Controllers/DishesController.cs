@@ -20,7 +20,7 @@ namespace HotelProject.Areas.HotelManager.Controllers
             ViewBag.DishesList = manager.GetAllDishes(categoryId);
             if (Request.IsAjaxRequest())
             {
-                return View("DishesList", ViewBag.DishesList);
+                return PartialView("DishesList", ViewBag.DishesList);//返回分布视图，异步刷新查询界面
             }            
             return View();
         }
@@ -58,16 +58,8 @@ namespace HotelProject.Areas.HotelManager.Controllers
             if (dishesId > 0)
             {
                 //提交成功后，判断是否有图片，如果有图片，则修改图片的名称
-                
-                FileInfo fi = new FileInfo(src);
-                if (fi.Exists)
-                {
-                    string modeifySrc = "~/Content/images/Dishes/" + dishesId.ToString() + ".PNG";
-                    fi.MoveTo(Server.MapPath(modeifySrc));
-                    src = null;               
-                }               
+                ModifyImgName(src,dishesId.ToString());
                 return Content("1");
-
             }
             else { return Content("0"); }
         }
@@ -75,18 +67,69 @@ namespace HotelProject.Areas.HotelManager.Controllers
 
         #region 修改菜品
 
+        //页面跳转
         public ActionResult ModifyDishes(int dishesId)
         {
             ViewBag.dishesId = dishesId;
             return View();
         }
 
+        //表单初始化
         public ActionResult SelectDishesById(int dishesId)
         {
             Dishes dish = manager.GetDishesById(dishesId);
             return Json(dish,JsonRequestBehavior.AllowGet);
         }
+
+        //提交修改
+        public ActionResult ModifyDishesById(Dishes dishe)
+        {
+            if (src!=null)//说明上传了新的图片
+            {
+                //删除老的图片
+                string srtSrc= Server.MapPath("~/Content/images/Dishes/" + dishe.DishesId+".PNG");
+                DeleteImg(srtSrc);
+                //将新上传的图片名称修改为合法的名称
+                ModifyImgName(src,dishe.DishesId.ToString());
+            }
+            int res = manager.ModifyDish(dishe);
+            return Content(res.ToString());
+        }
         #endregion
 
+        #region 删除菜品
+
+        public ActionResult DeleteDish(int disheId)
+        {
+            int res = manager.DeleteDish(disheId);
+            string srtSrc = Server.MapPath("~/Content/images/Dishes/" + disheId.ToString() + ".PNG");
+            DeleteImg(srtSrc);
+            return Content(res.ToString());
+        }
+        #endregion
+
+
+        #region 图片编辑方法
+        //修改图片的名称为id.PNG
+        public void ModifyImgName(string src,string id)
+        {
+            FileInfo fi = new FileInfo(src);
+            if (fi.Exists)
+            {
+                string modeifySrc = "~/Content/images/Dishes/" + id+ ".PNG";
+                fi.MoveTo(Server.MapPath(modeifySrc));
+                src = null;
+            }
+        }
+        //删除图片
+        public void DeleteImg(string src)
+        {
+            FileInfo fi = new FileInfo(src);
+            if (fi.Exists)
+            {
+                fi.Delete();
+            }
+        }
+        #endregion
     }
 }

@@ -50,8 +50,12 @@ namespace DAL
         public int ModifyDishes(Dishes dishes)
         {
             using (HotelDBEntities db=new HotelDBEntities())
-            {
-                db.Entry<Dishes>(dishes).State = EntityState.Modified;
+            {               
+                Dishes objDish = new Dishes() { DishesId=dishes.DishesId};
+                db.Dishes.Attach(objDish);
+                objDish.CategoryId = dishes.CategoryId;
+                objDish.DishesName = dishes.DishesName;
+                objDish.UnitPrice = dishes.UnitPrice;
                 return db.SaveChanges();
             }
         }
@@ -69,6 +73,20 @@ namespace DAL
                     db.Entry<Dishes>(obj).State = EntityState.Deleted;
                 }
                 return db.SaveChanges();
+            }
+        }
+
+        //单个删除
+        public int DeleteDisheById(int disheId)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {               
+                    Dishes obj = new Dishes()
+                    {
+                        DishesId = disheId
+                    };
+                    db.Entry<Dishes>(obj).State = EntityState.Deleted;               
+                    return db.SaveChanges();
             }
         }
         

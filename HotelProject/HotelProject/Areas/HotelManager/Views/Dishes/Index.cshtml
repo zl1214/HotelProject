@@ -35,23 +35,26 @@
     <div id="dishesList">
         @foreach (Models.Dishes item in ViewBag.DishesList)
         {
-            <div id="dishes">
-                <div id="dishesImg"><img src="~/Content/images/Dishes/@item.DishesImg" /></div>
-                <div id="dishesName">菜名：@item.DishesName</div>
-                <div id="UnitPrice">价格：￥@item.UnitPrice</div>
-                <div id="Category">分类：@item.DishesCategory.CategoryName</div>
-                <div id="btn1"><button class="layui-btn layui-btn-sm layui-btn-normal" data-dishid="@item.DishesId" id="modify">修 &nbsp;&nbsp;改</button></div>
-                <div id="btn2"><button class="layui-btn layui-btn-sm layui-btn-danger" id="deletebtn">删 &nbsp;&nbsp;除</button></div>                             
-            </div>            
+            <div id="@item.DishesId">
+                <div id="dishes">
+                    <div id="dishesImg"><img src="~/Content/images/Dishes/@item.DishesImg" /></div>
+                    <div id="dishesName">菜名：@item.DishesName</div>
+                    <div id="UnitPrice">价格：￥@item.UnitPrice</div>
+                    <div id="Category">分类：@item.DishesCategory.CategoryName</div>
+                    <div id="btn1"><button class="layui-btn layui-btn-sm layui-btn-normal" data-dishid="@item.DishesId">修 &nbsp;&nbsp;改</button></div>
+                    <div id="btn2"><button class="layui-btn layui-btn-sm layui-btn-danger" data-dishid="@item.DishesId">删 &nbsp;&nbsp;除</button></div>
+                </div>
+            </div>
         }
     </div>
 </div>
 
 
 <script>
-    layui.use(['form','jquery'], function () {
+    layui.use(['form', 'jquery', 'unobtrusive'], function () {
         var form = layui.form,
-            layer=top.layer,
+            layer = top.layer,
+             unobtrusive = layui.unobtrusive,
             $=layui.$;
 
         //菜品查询
@@ -97,6 +100,20 @@
                     });
                 }
             });
+        });
+
+        //删除菜品
+        $('.layui-btn-danger').click(function () {
+            var dishesId = $(this).attr("data-dishid");
+            layer.confirm("确认删除吗？", function () {
+                $.post('@Url.Action("DeleteDish")', { disheId: dishesId }, function (res) {
+                    layer.closeAll('dialog');
+                    if (res.responseText == "1") {
+                        $('#' + dishesId).remove();
+                        layer.msg("删除成功！");
+                    }                    
+                });
+            })
         });
 
     })

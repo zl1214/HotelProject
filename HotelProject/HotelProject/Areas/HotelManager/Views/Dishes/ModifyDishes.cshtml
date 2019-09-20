@@ -8,20 +8,20 @@
     <link href="~/Areas/HotelManager/CSS/AddDishes.css" rel="stylesheet" />
 }
 <div class="form">
-    @using (Ajax.BeginForm("", "Dishes", new AjaxOptions() { OnComplete = "submit" }))
+    @using (Ajax.BeginForm("ModifyDishesById", "Dishes", new AjaxOptions() { OnComplete = "submit" }))
     {
         <div class="layui-form" lay-filter="dishes">
             <div class="layui-form-item">
                 <div class="layui-upload">
-                    <img class="layui-upload-img" id="demo1" style="width:300px;height:200px;">
+                    <img class="layui-upload-img" id="demo1" style="width:300px;height:250px;">
                     <div class="layui-upload-list">
                         <button type="button" class="layui-btn" id="test1">修改图片</button>
                     </div>
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">菜名：</label>
+                <div class="layui-inline"id="top">
+                    <label class="layui-form-label" >菜名：</label>
                     <div class="layui-input-inline"><input id="DishesName" name="DishesName" type="text" class="layui-input" placeholder="请输入名称" lay-verify="required" /></div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     <button class="layui-btn" id="PublishDishes" lay-submit>修&nbsp;&nbsp;&nbsp;&nbsp;改</button>
                 </div>
             </div>
-            <input type="hidden"id="DishesId" value="@ViewBag.dishesId"/>
+            <input type="hidden"id="DishesId"  name="DishesId" value="@ViewBag.dishesId"/>
         </div>
     }
 
@@ -91,7 +91,7 @@
                 },
                 done: function (res) {
                     if (res.code == 0) {
-                        layer.msg("图片上传成功！");
+                        layer.msg("图片修改成功！");
                     }
                 }
             });
@@ -105,7 +105,7 @@
             //提交表单
             window.submit = function (res) {
                 if (res.responseText == "1") {
-                     layer.msg("添加成功");
+                     layer.msg("修改成功！");
                      setTimeout("Closelayer()", "1000")
 
                 }

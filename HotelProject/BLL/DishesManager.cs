@@ -29,5 +29,17 @@ namespace BLL
         {
             return service.GetDishesById(dishesId);
         }
+
+        //根据菜品id更新菜品
+        public int ModifyDish(Dishes dishe)
+        {
+            return service.ModifyDishes(dishe);
+        }
+
+        //根据菜品id删除菜品
+        public int DeleteDish(int disheId)
+        {
+            return service.DeleteDisheById(disheId);
+        }
     }
 }
