@@ -91,6 +91,7 @@
   <ItemGroup>
     <Content Include="Areas\HotelManager\CSS\AddDishes.css" />
     <Content Include="Areas\HotelManager\CSS\DishesList.css" />
+    <Content Include="Areas\HotelManager\CSS\Suggestion.css" />
     <Content Include="Content\CSS\Company.css" />
     <Content Include="Content\CSS\Dishes.css" />
     <Content Include="Content\CSS\DishesBook.css" />
@@ -488,6 +489,7 @@
     <Content Include="Areas\HotelManager\Views\Dishes\AddDishes.cshtml" />
     <Content Include="Areas\HotelManager\Views\Dishes\DishesList.cshtml" />
     <Content Include="Areas\HotelManager\Views\Dishes\ModifyDishes.cshtml" />
+    <Content Include="Areas\HotelManager\Views\Suggestion\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -500,7 +502,6 @@
     <Folder Include="Areas\HotelManager\Models\" />
     <Folder Include="Areas\HotelManager\Views\DishesBook\" />
     <Folder Include="Areas\HotelManager\Views\Recruitment\" />
-    <Folder Include="Areas\HotelManager\Views\Suggestion\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

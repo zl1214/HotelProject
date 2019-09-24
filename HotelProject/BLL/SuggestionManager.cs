@@ -15,5 +15,20 @@ namespace BLL
         {
             return service.AddSuggestion(suggestion);
         }
+
+        public TableModel<Suggestion> GetAllSuggestion(int page, int limit, int statusId)
+        {
+            return service.GetAllSuggestion(page,limit, statusId);
+        }
+
+        public int GetAllSuggesById(int statusId)
+        {
+            return service.GetAllSuggesById(statusId);
+        }
+
+        public int UpdateStatusId(Suggestion sug)
+        {
+            return service.UpdateStatusId(sug);
+        }
     }
 }

@@ -83,7 +83,7 @@
             });
         });
 
-        
+
         //修改菜品
         $('.layui-btn-normal').click(function () {
             var dishesId = $(this).attr("data-dishid");
@@ -106,12 +106,11 @@
         $('.layui-btn-danger').click(function () {
             var dishesId = $(this).attr("data-dishid");
             layer.confirm("确认删除吗？", function () {
-                $.post('@Url.Action("DeleteDish")', { disheId: dishesId }, function (res) {
-                    layer.closeAll('dialog');
-                    if (res.responseText == "1") {
-                        $('#' + dishesId).remove();
+                $.post("@Url.Action("DeleteDish")",{disheId:dishesId},function(res){
+                    if (res== "1") {
+                        $("#" + dishesId).remove();
                         layer.msg("删除成功！");
-                    }                    
+                    }
                 });
             })
         });

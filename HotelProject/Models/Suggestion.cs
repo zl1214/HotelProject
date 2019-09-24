@@ -21,6 +21,6 @@ namespace Models
         public Nullable<System.DateTime> SuggestionTime { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public Nullable<int> StatusId { get; set; }
+        public int? StatusId { get; set; }
     }
 }

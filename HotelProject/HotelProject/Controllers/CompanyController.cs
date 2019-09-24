@@ -31,6 +31,7 @@ namespace HotelProject.Controllers
         public ActionResult Suggestion(Suggestion suggestion)
         {
             suggestion.SuggestionTime = DateTime.Now;
+            suggestion.StatusId = 0;
             int res = new SuggestionManager().AddSuggestion(suggestion);
             return Content(res.ToString());
         }
