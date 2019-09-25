@@ -16,5 +16,17 @@ namespace BLL
         {
             return book.AddDishesBook(dishes);
         }
+
+        //获取所有的状态为0的订单
+        public TableModel<DishesBook> GetAllDishesBook(int page, int limit, string hotelName, string customerName)
+        {
+            return book.GetAllDishesBook(page,limit, hotelName, customerName);
+        }
+
+        //更新订单状态
+        public int UpdateDishesBook(DishesBook obj)
+        {
+            return book.UpdateDishesBook(obj);
+        }
     }
 }

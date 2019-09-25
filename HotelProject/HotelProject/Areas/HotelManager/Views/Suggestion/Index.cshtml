@@ -13,15 +13,15 @@
 <div id="DisplayPanel">
     <div class="panel">
         <label class="layui-form-label">待受理</label>
-        <div class="num"><label>@ViewBag.SugNum</label></div>
+        <div class="num"><label id="SugNum"></label></div>
     </div>
     <div class="panel">
         <label class="layui-form-label">已受理</label>
-        <div class="num"><label>@ViewBag.Handling</label></div>
+        <div class="num"><label id="Handling"></label></div>
     </div>
     <div class="panel">
         <label class="layui-form-label">已办结</label>
-        <div class="num"><label>@ViewBag.Handled</label></div>
+        <div class="num"><label id="Handled"></label></div>
     </div>
 </div>
 
@@ -54,13 +54,13 @@
 
 
 <script type="text/javascript">
-    layui.use(['table', 'jquery', 'unobtrusive','form'], function () {
+    layui.use(['table', 'jquery', 'unobtrusive', 'form'], function () {       
         var table = layui.table,
            layer = top.layer,
            form=layui.form,
            unobtrusive = layui.unobtrusive,
            $ = layui.$;
-
+       
         //表格初始化
         table.render({
             elem: "#demo",
@@ -106,6 +106,13 @@
             })
         });
 
+        var SugNum = @ViewBag.SugNum;
+        var Handling = @ViewBag.Handling;
+        var Handled=@ViewBag.Handled;
+        $('#SugNum').text(SugNum);
+        $('#Handling').text(Handling);
+        $('#Handled').text(Handled);
+
         //工具条监听
         table.on('tool(test)', function (obj) {
             var data = obj.data;
@@ -115,8 +122,13 @@
                 data.StatusId = 1;
                 $.post("@Url.Action("UpdateStatusId")", { sug: data }, function (res) {
                     if (res == "1") {
+                        SugNum--;
+                        Handling++;
+                        $('#SugNum').text(SugNum);
+                        $('#Handling').text(Handling);
                         obj.del(tr);
-                        layer.msg("已受理！");                       
+                        layer.msg("已受理！");
+                       
                     }
                 })
             }
@@ -126,6 +138,10 @@
                     if (res == "1") {
                         obj.del(tr);
                         layer.msg("已办结！");
+                        Handling--;
+                        Handled++;
+                        $('#Handling').text(Handling);
+                        $('#Handled').text(Handled);
                     }
                 })
             }
