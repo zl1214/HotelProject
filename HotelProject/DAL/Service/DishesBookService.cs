@@ -21,7 +21,7 @@ namespace DAL
             }
         }
 
-        //查询OrderStatus为0的全部订单
+        //按照条件查询OrderStatus为0和-1的全部订单
         public TableModel<DishesBook> GetAllDishesBook(int page,int limit, string hotelName, string customerName)
         {
             using (HotelDBEntities db=new HotelDBEntities())
@@ -37,7 +37,7 @@ namespace DAL
                 }
                 TableModel<DishesBook> table = new TableModel<DishesBook>();
                 table.count = list.Count();
-                table.data = list.OrderByDescending(s=>s.OrderStatus).Skip((page-1)*limit).Take(limit).ToList<DishesBook>();
+                table.data = list.OrderByDescending(s => s.OrderStatus).Skip((page-1)*limit).Take(limit).OrderByDescending(s => s.BookTime).ToList<DishesBook>();
                 return table;
             }
         }

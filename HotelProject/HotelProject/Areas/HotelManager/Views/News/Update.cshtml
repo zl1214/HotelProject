@@ -67,8 +67,7 @@
             parent.layer.close(index);
         };
 
-        window.submitComplete = function (res) {
-            debugger
+        window.submitComplete = function (res) {          
             if (res.responseText == "1") {
                 layer.msg("修改成功！");
                 top["main_content"].refreshTable();

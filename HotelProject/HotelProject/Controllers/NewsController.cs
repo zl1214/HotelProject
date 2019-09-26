@@ -27,8 +27,8 @@ namespace HotelProject.Controllers
         //根据newID获取新闻详情
         public ActionResult Detail(int newId)
         {
-            ViewBag.news = manager.SelectNewsById(newId);
-            return View();
+           ViewBag.news = manager.SelectNewsById(newId);
+           return View();
         }
     }
 }

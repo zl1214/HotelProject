@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Creat";
+}
+
+
+<div style="margin-top:20px">
+    @using (Ajax.BeginForm("AddCreat", "Recruitment", new AjaxOptions() { OnComplete = "submitComplete" }))
+    {
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">职位：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="PostName" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">类别：</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="PostType" value="全职" title="全职" checked>
+                        <input type="radio" name="PostType" value="兼职" title="兼职">
+                    </div>
+                </div>
+            </div>  
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">经验：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Experience" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">学历：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="EduBackground" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+            </div>         
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">工作地点：</label>
+                    <div class="layui-input-inline">
+                        <select name="PostPlace">
+                            <option selected>请选择...</option>
+                            <option value="天津">北京</option>
+                            <option value="北京">天津</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">招聘人数：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="RequireCount" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+            </div>
+        
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">职位描述：</label>
+                    <div class="layui-input-inline" >
+                        <textarea name="PostDesc" id="PostDesc" style="width:190px"></textarea>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">职位要求：</label>
+                    <div class="layui-input-inline" >
+                        <textarea name="PostRequire" id="PostRequire"style="width:190px"></textarea>
+                    </div>
+                </div>
+            </div>
+      
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系人：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Manager"  lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="PhoneNumber" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Email" lay-verify="required" class="layui-input" />
+                    </div>
+                </div>
+            </div>           
+                    
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit>添&nbsp;&nbsp;&nbsp;&nbsp;加</button>
+                    <button type="reset" class="layui-btn layui-btn-primary" onclick="Closelayer()">取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    layui.use(['element', 'form', 'jquery', 'unobtrusive','layer'], function () {
+        var form = layui.form,
+            element = layui.element,
+            layer=top.layer,
+            unobtrusive = layui.unobtrusive,
+            $ = layui.$;
+
+        //弹窗关闭
+        window.Closelayer = function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        };
+
+        //提交成功后，页面刷新前的回调函数
+        window.submitComplete = function (res) {
+            if (res.responseText == "1") {
+                layer.msg("添加成功！");
+                top["main_content"].refreshTable();
+                Closelayer();
+            }
+            else {
+                layer.msg("添加失败！");
+            }
+        }
+
+    })
+</script>
+

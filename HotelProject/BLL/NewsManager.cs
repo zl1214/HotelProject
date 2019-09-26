@@ -13,13 +13,13 @@ namespace BLL
         private NewsService service = new NewsService();
 
         //获取所有新闻
-        public TableModel<object> GetAllNews(int? newCategory, int page, int limit)
+        public TableModel<News> GetAllNews(int? newCategory, int page, int limit)
         {
             return service.SelectNews(newCategory,page,limit);
         }
 
         //根据新闻Id获取新闻
-        public object SelectNewsById(int newId)
+        public News SelectNewsById(int newId)
         {
             return service.SelectNewsById(newId);
         }

@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "新闻管理";
+    ViewBag.Title = "招聘管理";
 }
 
 <div style="margin:0px 10px ">
-    <table id="newsTable" lay-filter="newsTable"></table>
+    <table id="Recruitment" lay-filter="RecruitmentTable"></table>
 </div>
 
 
@@ -17,25 +17,33 @@
 
         //表格初始化
         table.render({
-            elem: '#newsTable',
-            url: '@Url.Action("GetAllNews")',
+            elem: '#Recruitment',
+            url: '@Url.Action("RecruitmentList")',
             page: true,
             toolbar: 'default',
+            height:'510px',
             cols: [[
-                { type: 'checkbox', width: '8%', align: 'center' },
-                { type: 'numbers', title: '序号', width: '8%', align: 'center' },
-                { field: 'NewsTitle', title: '新闻标题', width: '16%', align: 'center' },
-                { field: 'NewsContents', title: '新闻内容', width: '38%', align: 'center' },
-                { field: 'CategoryName', title: '新闻分类', width: '10%', align: 'center' },
-                { field: 'PublishTime', title: '发布时间', align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+                { type: 'checkbox', width: '8%', align: 'center', fixed:'left'},
+                { field: 'PostName', title: '职位', width: '10%', align: 'center' },
+                { field: 'PostType', title: '类别', width: '10%', align: 'center' },
+                { field: 'PostPlace', title: '工作地点', width: '10%', align: 'center' },
+                { field: 'PostDesc', title: '职位描述', width: '10%', align: 'center' },
+                { field: 'PostRequire', title: '职位要求', width: '10%', align: 'center' },
+                { field: 'Experience', title: '经验', width: '10%', align: 'center' },
+                { field: 'EduBackground', title: '学历', width: '10%', align: 'center' },
+                { field: 'RequireCount', title: '招聘人数', width: '10%', align: 'center' },
+                { field: 'Manager', title: '联系人', width: '10%', align: 'center' },
+                { field: 'PhoneNumber', title: '电话', width: '15%', align: 'center' },
+                { field: 'Email', title: '邮箱', width: '15%', align: 'center' },
+                { field: 'PublishTime', title: '发布时间', width: '15%',align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
 
             ]]
         });
 
         //表格刷新
         window.refreshTable = function () {
-            table.reload('newsTable', {
-                url: '@Url.Action("GetAllNews")',
+            table.reload('Recruitment', {
+                url: '@Url.Action("RecruitmentList")',
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
@@ -44,26 +52,26 @@
 
 
         //表头工具栏事件监听
-        table.on('toolbar(newsTable)', function (obj) {
-            var checkStatus = table.checkStatus('newsTable');
+        table.on('toolbar(RecruitmentTable)', function (obj) {
+            var checkStatus = table.checkStatus('Recruitment');
 
             switch (obj.event) {
                 //添加事件
                 case 'add':
                     layer.open({
                         type: 2,
-                        title: "添加新闻",
-                        area: ['900px', '500px'],
+                        title: "添加招聘信息",
+                        area: ['750px', '500px'],
                         offset: 'auto',
-                        content: ['/HotelManager/News/Creat', 'no']
+                        content: ['/HotelManager/Recruitment/Creat']
                     });
                     break;
 
                     //删除事件
                 case 'delete':
                     var idNum = new Array();
-                    for (var i = 0; i < checkStatus.data.length; i++) {                        
-                        idNum.push(checkStatus.data[i].NewsId)
+                    for (var i = 0; i < checkStatus.data.length; i++) {
+                        idNum.push(checkStatus.data[i].PostId)
                     }
                     if (checkStatus.data.length == 0) {
                         layer.msg("请选择要删除的对象！");
@@ -78,7 +86,7 @@
                                 success: function (res) {
                                     if (res > 0) {
                                         layer.msg("成功删除" + res + "个对象！");
-                                        top["main_content"].refreshTable();
+                                        refreshTable();
                                     }
                                 }
                             });
@@ -93,13 +101,13 @@
                     }
                     else if (checkStatus.data.length > 1) { layer.msg("一次只能修改一个对象！"); }
                     else {
-                        var newsId = checkStatus.data[0].NewsId;
+                        var postId = checkStatus.data[0].PostId;
                         layer.open({
                             type: 2,
-                            title: "修改新闻",
-                            area: ['900px', '500px'],
+                            title: "修改内容",
+                            area: ['750px', '500px'],
                             offset: 'auto',
-                            content: ['/HotelManager/News/Update?newsId=' + newsId, 'no']
+                            content: ['/HotelManager/Recruitment/Update?postId=' + postId]
                         });
                     }
                     break;
@@ -107,15 +115,17 @@
         });
 
         //双击选中行事件
-        table.on('rowDouble(newsTable)', function (obj) {       
-            var newsId = obj.data.NewsId;
+        table.on('rowDouble(RecruitmentTable)', function (obj) {          
+            var postId = obj.data.postId;
             layer.open({
                 type: 2,
                 title: "修改新闻",
                 area: ['900px', '500px'],
                 offset: 'auto',
-                content: ['/HotelManager/News/Update?newsId=' + newsId, 'no']
+                content: ['/HotelManager/Recruitment/Update?postId=' + postId]
             });
         });
     })
 </script>
+
+

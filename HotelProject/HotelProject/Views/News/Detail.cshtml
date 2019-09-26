@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "新闻详情";
+
 }
 
 @section CustomCss{
@@ -21,16 +22,19 @@
         <div id="downimg"><img src="~/Content/images/Carousel/娱乐.png" /></div>
     </div>
 }
+
+
+
 <div id="newsDetail">
     <div id="newsTitle">
        <h2>@ViewBag.news.NewsTitle</h2>
     </div> 
     <div id="newsPublishTime">
-       发布时间： @ViewBag.news.PublishTime
+       发布时间：@ViewBag.news.PublishTime
     </div>
     <div id="newsNewsContents">
         <p>
-            @ViewBag.news.NewsContents
+           @ViewBag.news.NewsContents
         </p>
         
     </div>

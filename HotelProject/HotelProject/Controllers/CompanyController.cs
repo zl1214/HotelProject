@@ -42,9 +42,9 @@ namespace HotelProject.Controllers
         }
 
         
-        public ActionResult RecruitmentList()
+        public ActionResult RecruitmentList(int page, int limit)
         {
-            TableModel<Recruitment> list = new RecruitmentManager().GetAllRecruitment();
+            TableModel<Recruitment> list = new RecruitmentManager().GetAllRecruitment(page,limit);
             return Json(list,JsonRequestBehavior.AllowGet);
         }
 

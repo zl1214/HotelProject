@@ -55,7 +55,7 @@
                     height: 480,
                     cols: [[
                         { field: 'NewsTitle', title: '新闻标题', width: '40%', align: 'center' },
-                        { field: 'CategoryName', title: '新闻分类', width: '30%', align: 'center' },
+                        { title: '新闻分类', width: '30%', align: 'center', templet: function (d) {return d.NewsCategory.CategoryName } },
                         { field: 'PublishTime', title: '发布时间', width: '30%', align: 'center', templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } }
                     ]]
                 });
