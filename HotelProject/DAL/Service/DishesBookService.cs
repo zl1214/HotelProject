@@ -37,7 +37,7 @@ namespace DAL
                 }
                 TableModel<DishesBook> table = new TableModel<DishesBook>();
                 table.count = list.Count();
-                table.data = list.OrderByDescending(s => s.OrderStatus).Skip((page-1)*limit).Take(limit).OrderByDescending(s => s.BookTime).ToList<DishesBook>();
+                table.data = list.OrderByDescending(s => s.OrderStatus).Skip((page-1)*limit).Take(limit).ToList<DishesBook>();
                 return table;
             }
         }

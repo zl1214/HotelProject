@@ -91,6 +91,10 @@
   <ItemGroup>
     <Content Include="Areas\HotelManager\CSS\AddDishes.css" />
     <Content Include="Areas\HotelManager\CSS\DishesList.css" />
+    <Content Include="Areas\HotelManager\CSS\images\demo-1-bg.jpg" />
+    <Content Include="Areas\HotelManager\CSS\images\密码.PNG" />
+    <Content Include="Areas\HotelManager\CSS\images\用户名.PNG" />
+    <Content Include="Areas\HotelManager\CSS\Login.css" />
     <Content Include="Areas\HotelManager\CSS\Suggestion.css" />
     <Content Include="Content\CSS\Company.css" />
     <Content Include="Content\CSS\Dishes.css" />
@@ -139,6 +143,7 @@
     <Content Include="Content\images\Head\地址.png" />
     <Content Include="Content\images\Head\标题.png" />
     <Content Include="Content\images\Head\秋天.jpg" />
+    <Content Include="Content\images\001.jpg" />
     <Content Include="Content\layui\css\layui.css" />
     <Content Include="Content\layui\css\layui.mobile.css" />
     <Content Include="Content\layui\css\modules\code.css" />
@@ -443,6 +448,7 @@
     <Compile Include="Areas\HotelManager\Controllers\NewsController.cs" />
     <Compile Include="Areas\HotelManager\Controllers\RecruitmentController.cs" />
     <Compile Include="Areas\HotelManager\Controllers\SuggestionController.cs" />
+    <Compile Include="Areas\HotelManager\Controllers\SysAdminController.cs" />
     <Compile Include="Areas\HotelManager\HotelManagerAreaRegistration.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
@@ -494,6 +500,8 @@
     <Content Include="Areas\HotelManager\Views\Recruitment\Index.cshtml" />
     <Content Include="Areas\HotelManager\Views\Recruitment\Creat.cshtml" />
     <Content Include="Areas\HotelManager\Views\Recruitment\Update.cshtml" />
+    <Content Include="Areas\HotelManager\Views\SysAdmin\AdminLogin.cshtml" />
+    <Content Include="Areas\HotelManager\Views\SysAdmin\AdminMain.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
