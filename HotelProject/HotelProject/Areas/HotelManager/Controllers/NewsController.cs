@@ -8,6 +8,7 @@ using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
+    [Authorize]
     public class NewsController : Controller
     {
         private NewsManager manager = new NewsManager();

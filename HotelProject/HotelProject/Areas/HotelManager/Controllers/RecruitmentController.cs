@@ -8,6 +8,7 @@ using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
+    [Authorize]
     public class RecruitmentController : Controller
     {
         // GET: HotelManager/Recruitment

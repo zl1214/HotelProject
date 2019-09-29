@@ -8,6 +8,7 @@ using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
+    [Authorize]
     public class SuggestionController : Controller
     {
         private SuggestionManager manager = new SuggestionManager();

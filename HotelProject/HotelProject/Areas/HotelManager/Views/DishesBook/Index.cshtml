@@ -35,10 +35,10 @@
 <script type="text/html" id="toollist">
     {{#  if(d.OrderStatus == -1){ }}
     <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="cancel" id="btn1">取消</a>
-    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="close" id="btn2">关闭</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="close" id="btn2">已消费</a>
     {{#  } else if(d.OrderStatus == 0){ }}
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cancel" id="btn1">取消</a>
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="close" id="btn2">关闭</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="close" id="btn2">已消费</a>
     {{#  } }}
 </script>
 

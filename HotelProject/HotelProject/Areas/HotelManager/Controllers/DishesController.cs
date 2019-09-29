@@ -9,6 +9,7 @@ using Models;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
+    [Authorize]
     public class DishesController : Controller
     {
         private DishesManager manager = new DishesManager();

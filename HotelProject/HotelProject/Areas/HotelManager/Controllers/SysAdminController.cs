@@ -9,6 +9,7 @@ using System.Web.Security;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
+    
     public class SysAdminController : Controller
     {
         private SysAdminsManager manager = new SysAdminsManager();
@@ -16,6 +17,10 @@ namespace HotelProject.Areas.HotelManager.Controllers
         // GET: HotelManager/SysAdmin
         public ActionResult Index()
         {
+            //if (this.User.Identity.Name==null)
+            //{
+            //    Server.Transfer("~/HotelManager/");
+            //}            
             return View("AdminLogin");
         }
 
@@ -25,7 +30,7 @@ namespace HotelProject.Areas.HotelManager.Controllers
             if (objAdmin != null)
             {
                 Session["AadminName"] = objAdmin.LoginName;
-                FormsAuthentication.SetAuthCookie(objAdmin.LoginName, true);
+                FormsAuthentication.SetAuthCookie(objAdmin.LoginName, false);
                 return Content("1");
             }
             else
@@ -37,6 +42,14 @@ namespace HotelProject.Areas.HotelManager.Controllers
         public ActionResult AdminMain()
         {
             return View();
+        }
+
+        [Authorize]
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            Session["AadminName"] = null;
+            return View("AdminLogin");
         }
     }
 }

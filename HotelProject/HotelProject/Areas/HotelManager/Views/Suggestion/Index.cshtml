@@ -48,8 +48,17 @@
 
 
 <script type="text/html" id="toollist">
+    {{#  if(d.StatusId == 0){ }}
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="handling" id="btn1">受理</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handled" id="btn2">办结</a>
+    {{#  } else if(d.StatusId == 1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handling" id="btn1">受理</a>
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="handled" id="btn2">办结</a>
+    {{#  } else if(d.StatusId == 2){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handling" id="btn1">受理</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handled" id="btn2">办结</a>
+    {{#  } }}
+    
 </script>
 
 
@@ -75,12 +84,7 @@
                 { field: 'PhoneNumber', title: '顾客电话', width: '12%', align: 'center' },
                 { field: 'Email', title: '顾客邮箱', width: '14%', align: 'center' },
                 { title: '操作', toolbar: '#toollist', align: 'center'}
-            ]],
-            done: function (res) {
-                if (res.data[0].StatusId == 0) {
-                    $('.layui-btn-warm').attr("class", "layui-btn layui-btn-xs layui-btn-disabled")
-                }
-            }
+            ]]            
         });
 
         //按钮的查询事件
@@ -90,19 +94,7 @@
             table.reload('demo', {
                 url: '@Url.Action("SuggestionList")',
                 where: { statusId: statusId },
-                page: { curr: 1 },
-                done: function (res) {
-                    if (res.data[0].StatusId == 0) {
-                        $('.layui-btn-warm').attr("class", "layui-btn layui-btn-xs layui-btn-disabled")
-                    }
-                    if (res.data[0].StatusId == 1) {
-                        $('.layui-btn-normal').attr("class", "layui-btn layui-btn-xs layui-btn-disabled")
-                    }
-                    if (res.data[0].StatusId == 2) {
-                        $('.layui-btn-normal').attr("class", "layui-btn layui-btn-xs layui-btn-disabled")
-                        $('.layui-btn-warm').attr("class", "layui-btn layui-btn-xs layui-btn-disabled")
-                    }
-                }
+                page: { curr: 1 }                
             })
         });
 

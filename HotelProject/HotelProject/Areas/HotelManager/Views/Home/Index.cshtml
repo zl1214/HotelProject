@@ -20,13 +20,9 @@
                     <a href="javascript:;">
                         <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
                         @Session["AadminName"]
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a data-type="menu" data-href="@Url.Action("Index","Dishes")">基本资料</a></dd>
-                        <dd><a data-type="menu" data-href="@Url.Action("Index","Dishes")">安全设置</a></dd>
-                    </dl>
+                    </a>                    
                 </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
+                <li class="layui-nav-item"><a href="@Url.Action("SignOut","SysAdmin")">退了</a></li>
             </ul>
         </div>
 
