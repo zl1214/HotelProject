@@ -131,7 +131,6 @@
     <Content Include="Content\images\Dishes\caipin06.jpg" />
     <Content Include="Content\images\Dishes\caipin07.jpg" />
     <Content Include="Content\images\Dishes\caipin08.jpg" />
-    <Content Include="Content\images\Dishes\海边.jpg" />
     <Content Include="Content\images\Dishes\海边1.png" />
     <Content Include="Content\images\Dishes\海边2.png" />
     <Content Include="Content\images\Environment\huanjing01.jpg" />
@@ -502,6 +501,7 @@
     <Content Include="Areas\HotelManager\Views\Recruitment\Update.cshtml" />
     <Content Include="Areas\HotelManager\Views\SysAdmin\AdminLogin.cshtml" />
     <Content Include="Areas\HotelManager\Views\SysAdmin\AdminMain.cshtml" />
+    <None Include="Properties\PublishProfiles\HotelWeb.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
