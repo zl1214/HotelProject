@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权限管理</title>  
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+    <link href="~/Content/CSS/admin.css" rel="stylesheet" />
+</head>
+<body>   
+        @RenderBody()
+
+        <script type="text/javascript">
+            layui.config({
+                base:'/Content/'
+            }).extend({
+                index:'lib/index'
+            }).use('index')
+        </script>
+</body>
+</html>
