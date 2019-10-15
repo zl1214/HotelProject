@@ -10,7 +10,7 @@
                         <a click-event="flexible"><i class="layui-icon layui-icon-shrink-right" id="icon_flexible"></i></a>
                     </li>
                     <li class="layui-nav-item">
-                        <a click-event="flexible"><i class="layui-icon layui-icon-refresh"></i></a>
+                        <a click-event="refresh"><i class="layui-icon layui-icon-refresh"></i></a>
                     </li>
                 </ul>
             </div>
@@ -18,7 +18,7 @@
             <div class="layui-layout-right">
                 <ul class="layui-nav">
                     <li class="layui-nav-item">
-                        <a><i class="layui-icon layui-icon-screen-full"></i></a>
+                        <a click-event="fullScreen"><i class="layui-icon layui-icon-screen-full"></i></a>
                     </li>
                     <li class="layui-nav-item">
                         <a><img src="~/Content/image/headimg.jpg" class="layui-nav-img" />贤心</a>
@@ -45,7 +45,7 @@
                     <img src="~/Content/image/headimg.jpg" />
                     <p>权限管理系统</p>
                 </div>
-                <ul class="layui-nav layui-nav-tree" lay-shink="all">
+                <ul class="layui-nav layui-nav-tree" lay-shink="all" id="menu_side">
                     <li class="layui-nav-item layui-nav-itemed" >
                         <a>
                             <i class="layui-icon layui-icon-home"></i>
@@ -53,7 +53,7 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd class="layui-this">
-                                <a>控制台</a>
+                                <a lay-href="/Home/Controller">控制台</a>
                             </dd>                           
                         </dl>
                     </li>
@@ -64,13 +64,13 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd >
-                                <a>按钮</a>
+                                <a lay-href="/Element/Button">按钮</a>
                             </dd>
                             <dd >
-                                <a>静态表格</a>
+                                <a lay-href="/Element/StaticTable">静态表格</a>
                             </dd>
                             <dd >
-                                <a>时间线</a>
+                                <a lay-href="/Element/TimeLine">时间线</a>
                             </dd>
                         </dl>
                     </li>
@@ -86,13 +86,13 @@
                         <a>
                             <dl class="layui-nav-child layui-anim-fadein">
                                 <dd>
-                                    <a>关闭当前标签页</a>
+                                    <a click-event="closeThis">关闭当前标签页</a>
                                 </dd>
                                 <dd>
-                                    <a>关闭其他标签页</a>
+                                    <a click-event="closeOther">关闭其他标签页</a>
                                 </dd>
                                 <dd>
-                                    <a>关闭全部标签页</a>
+                                    <a click-event="closeAll">关闭全部标签页</a>
                                 </dd>
                             </dl>
                         </a>
@@ -100,18 +100,18 @@
                 </ul>
             </div>
             <!--页面标签选项卡-->
-            <div class="layui-tab" lay-allowClose="true">
-                <ul class="layui-tab-title">
-                    <li class="layui-this">
+            <div class="layui-tab" lay-allowClose="true" lay-filter="layout-tab">
+                <ul class="layui-tab-title" id="tab_Titles">
+                    <li class="layui-this" lay-id="/Home/Controller">
                         <i class="layui-icon layui-icon-home"></i>
                     </li>
                 </ul>
             </div>
         </div>
         <!--主内容区-->
-        <div class="layui-body">
+        <div class="layui-body" id="tab_Bodys">
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="@Url.Action("Controller")" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="/Home/Controller" frameborder="0" class="layadmin-iframe"></iframe>
             </div>
         </div>
     </div>
