@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "菜品管理";
+}
+@section css{   
+   <link href="~/Areas/HotelManager/CSS/DishesList.css" rel="stylesheet" />
+    }
+
+
+<div id="form">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline" style="margin-left:33px">
+                <label class="layui-form-label">菜系：</label>
+                <div class="layui-input-block">
+                    <select id="CategoryId">
+                        <option selected="" value="">请选择类别</option>
+                        <option value="1">川菜</option>
+                        <option value="2">湘菜</option>
+                        <option value="3">鲁菜</option>
+                        <option value="4">海鲜类</option>
+                        <option value="5">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" id="queryDishes">搜 &nbsp;&nbsp;索</button>
+                    <button class="layui-btn" id="addDishes">增 &nbsp;&nbsp;加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dishesList">
+        @foreach (Models.Dishes item in ViewBag.DishesList)
+        {
+            <div id="@item.DishesId">
+                <div id="dishes">
+                    <div id="dishesImg"><img src="~/Content/images/Dishes/@item.DishesImg" /></div>
+                    <div id="dishesName">菜名：@item.DishesName</div>
+                    <div id="UnitPrice">价格：￥@item.UnitPrice</div>
+                    <div id="Category">分类：@item.DishesCategory.CategoryName</div>
+                    <div id="btn1"><button class="layui-btn layui-btn-sm layui-btn-normal" data-dishid="@item.DishesId">修 &nbsp;&nbsp;改</button></div>
+                    <div id="btn2"><button class="layui-btn layui-btn-sm layui-btn-danger" data-dishid="@item.DishesId">删 &nbsp;&nbsp;除</button></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script>
+    layui.use(['form', 'jquery', 'unobtrusive'], function () {
+        var form = layui.form,
+            layer = top.layer,
+             unobtrusive = layui.unobtrusive,
+            $=layui.$;
+
+        //菜品查询
+        $('#queryDishes').click(function () {
+            var CategoryId = $('#CategoryId').val();
+            //window.location = "/HotelManager/Dishes/Index?categoryId=" + CategoryId;
+            $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                $('#dishesList').html(res);
+            });
+        });
+
+        //菜品添加
+        $('#addDishes').click(function () {
+            layer.open({
+                type: 2,
+                title: "菜品添加",
+                area: ['800px', '400px'],
+                offset: 'auto',
+                content: ['/HotelManager/Dishes/AddDishes', 'no'],
+                end: function () {
+                    var CategoryId = $('#CategoryId').val();
+                    $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                        $('#dishesList').html(res);
+                    });
+                }
+            });
+        });
+
+
+        //修改菜品
+        $('.layui-btn-normal').click(function () {
+            var dishesId = $(this).attr("data-dishid");
+            layer.open({
+                type: 2,
+                title: "修改菜品",
+                area: ['800px', '400px'],
+                offset: 'auto',
+                content: ['/HotelManager/Dishes/ModifyDishes?dishesId=' + dishesId, 'no'],
+                end: function () {
+                    var CategoryId = $('#CategoryId').val();
+                    $.post('@Url.Action("Index")', { categoryId: CategoryId }, function (res) {
+                        $('#dishesList').html(res);
+                    });
+                }
+            });
+        });
+
+        //删除菜品
+        $('.layui-btn-danger').click(function () {
+            var dishesId = $(this).attr("data-dishid");
+            layer.confirm("确认删除吗？", function () {
+                $.post("@Url.Action("DeleteDish")",{disheId:dishesId},function(res){
+                    if (res== "1") {
+                        $("#" + dishesId).remove();
+                        layer.msg("删除成功！");
+                    }
+                });
+            })
+        });
+
+    })
+</script>
+
+

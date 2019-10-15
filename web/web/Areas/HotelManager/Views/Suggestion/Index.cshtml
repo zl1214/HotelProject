@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "预订管理";
+}
+
+@section css{
+
+    <link href="~/Areas/HotelManager/CSS/Suggestion.css" rel="stylesheet" />
+}
+
+
+
+<div id="DisplayPanel">
+    <div class="panel">
+        <label class="layui-form-label">待受理</label>
+        <div class="num"><label id="SugNum"></label></div>
+    </div>
+    <div class="panel">
+        <label class="layui-form-label">已受理</label>
+        <div class="num"><label id="Handling"></label></div>
+    </div>
+    <div class="panel">
+        <label class="layui-form-label">已办结</label>
+        <div class="num"><label id="Handled"></label></div>
+    </div>
+</div>
+
+<div id="form">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <select id="StatusId">
+                    <option selected>请选择...</option>
+                    <option value="1">已受理</option>
+                    <option value="2">已办结</option>
+                </select>
+            </div>
+            <div class="layui-inline"><button class="layui-btn"id="btnQuery">查&nbsp;&nbsp;&nbsp;&nbsp;询</button> </div>
+        </div>
+    </div>
+</div>
+
+<div class="table">
+    <table id="demo" lay-filter="test"></table>
+</div>
+
+
+
+
+<script type="text/html" id="toollist">
+    {{#  if(d.StatusId == 0){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="handling" id="btn1">受理</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handled" id="btn2">办结</a>
+    {{#  } else if(d.StatusId == 1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handling" id="btn1">受理</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="handled" id="btn2">办结</a>
+    {{#  } else if(d.StatusId == 2){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handling" id="btn1">受理</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="handled" id="btn2">办结</a>
+    {{#  } }}
+    
+</script>
+
+
+<script type="text/javascript">
+    layui.use(['table', 'jquery', 'unobtrusive', 'form'], function () {       
+        var table = layui.table,
+           layer = top.layer,
+           form=layui.form,
+           unobtrusive = layui.unobtrusive,
+           $ = layui.$;
+       
+        //表格初始化
+        table.render({
+            elem: "#demo",
+            url: "@Url.Action("SuggestionList")",
+            page: true,
+            height:'410px',
+            cols: [[
+                { field: 'CustomerName', title: '顾客名称', width: '10%', align: 'center' },
+                { field: 'ConsumeDesc', title: '消费情况', width: '15%', align: 'center' },
+                { field: 'SuggestionDesc', title: '投诉内容', width: '20%', align: 'center' },
+                { field: 'SuggestionTime', title: '投诉时间', width: '15%', align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.SuggestionTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+                { field: 'PhoneNumber', title: '顾客电话', width: '12%', align: 'center' },
+                { field: 'Email', title: '顾客邮箱', width: '14%', align: 'center' },
+                { title: '操作', toolbar: '#toollist', align: 'center'}
+            ]]            
+        });
+
+        //按钮的查询事件
+        $('#btnQuery').click(function () {
+            var statusId = $('#StatusId').val();
+            //表格重载
+            table.reload('demo', {
+                url: '@Url.Action("SuggestionList")',
+                where: { statusId: statusId },
+                page: { curr: 1 }                
+            })
+        });
+
+        var SugNum = @ViewBag.SugNum;
+        var Handling = @ViewBag.Handling;
+        var Handled=@ViewBag.Handled;
+        $('#SugNum').text(SugNum);
+        $('#Handling').text(Handling);
+        $('#Handled').text(Handled);
+
+        //工具条监听
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            var tr = obj.tr;
+            if (layEvent === 'handling') {
+                data.StatusId = 1;
+                $.post("@Url.Action("UpdateStatusId")", { sug: data }, function (res) {
+                    if (res == "1") {
+                        SugNum--;
+                        Handling++;
+                        $('#SugNum').text(SugNum);
+                        $('#Handling').text(Handling);
+                        obj.del(tr);
+                        layer.msg("已受理！");
+                       
+                    }
+                })
+            }
+            else if (layEvent === 'handled') {
+                data.StatusId = 2;
+                $.post("@Url.Action("UpdateStatusId")", { sug: data }, function (res) {
+                    if (res == "1") {
+                        obj.del(tr);
+                        layer.msg("已办结！");
+                        Handling--;
+                        Handled++;
+                        $('#Handling').text(Handling);
+                        $('#Handled').text(Handled);
+                    }
+                })
+            }
+        })
+
+    })
+</script>

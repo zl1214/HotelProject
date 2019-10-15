@@ -1,0 +1,8 @@
+﻿#DisplayPanel{width:550px;margin:10px 0px 10px 0px;float:left;}
+.panel{width:155px;height:70px;margin-left:20px;background-color:#F8F8F8;float:left;}
+.panel label{text-align:left;color:#999999}
+.num{text-align:left;width:120px;padding-left:15px;float:left;}
+.num label{color:#009688;font-size:25px;}
+
+#form{margin:25px 0px 0px 20px;float:left;}
+.table{margin:0px 20px 0px 20px;clear:left}

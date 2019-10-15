@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "投诉建议";
+}
+
+@section CustomCss{
+    <link href="~/Content/CSS/DishesBook.css" rel="stylesheet" />
+}
+
+@section TopContent{
+
+    <blockquote class="layui-elem-quote"><h2>投诉建议</h2></blockquote>
+
+}
+<div class="dishesBook">
+    <div class="leftshow">
+        <div class="dishesImg">            
+            <img src="~/Content/images/Dishes/海边1.png" />
+            <img src="~/Content/images/Dishes/海边2.png" />
+        </div>
+    </div>
+    <div class="form">
+        @using (Ajax.BeginForm("Suggestion", "Company", new AjaxOptions() { OnSuccess = "ajaxComplete" }))
+        {
+
+            <div class="layui-form ">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客人姓名：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="请输入" name="CustomerName" lay-verify="required" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">消费情况：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="请输入" name="ConsumeDesc" lay-verify="required" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">消费时间：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="请选择消费时间" id="date" name="ConsumeTime" lay-verify="required" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号码：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="请输入" name="PhoneNumber" lay-verify="required|phone" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电子邮件：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="请输入" name="Email" />
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">投诉建议：</label>
+                    <div class="layui-input-inline">
+                        <textarea name="SuggestionDesc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit>投诉</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    layui.use(['form', 'laydate', 'jquery', 'layer', 'unobtrusive'], function () {
+        var form = layui.form,
+            laydate = layui.laydate,
+            layer = layui.layer,
+            unobtrusive = layui.unobtrusive,
+            $ = layui.$;
+
+        laydate.render({
+            elem: '#date',
+            type: 'datetime'
+
+        });
+
+        window.ajaxComplete = function (data) {
+            if (data == "1") {
+                layer.msg("投诉成功，请等待客服受理！");
+                setTimeout(" window.location='/Company/Index'", "2000");               
+            } else { layer.msg("投诉失败！");}
+        };
+    })
+</script>
+

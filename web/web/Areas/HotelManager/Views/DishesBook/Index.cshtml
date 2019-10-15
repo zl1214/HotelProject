@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "预订管理";
+}
+<div id="form" style="margin-top:20px">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">店名：</label>
+                <div class="layui-input-inline">
+                    <select id="HotelName">
+                        <option selected value="">请选择店名</option>
+                        <option value="深圳南山店">深圳南山店</option>
+                        <option value="深圳宝安店">深圳宝安店</option>
+                        <option value="深圳罗湖店">深圳罗湖店</option>
+                        <option value="深圳龙岗店">深圳龙岗店</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名：</label>
+                <div class="layui-input-inline"><input class="layui-input" type="text" name="CustomerName" id="CustomerName" /></div>
+            </div>
+            <div class="layui-inline"><button class="layui-btn" id="btnQuery">查&nbsp;&nbsp;&nbsp;&nbsp;询</button> </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin:10px 10px 0px 10px">
+    <table id="DishesBook" lay-filter="BookList"></table>
+</div>
+
+
+
+<script type="text/html" id="toollist">
+    {{#  if(d.OrderStatus == -1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="cancel" id="btn1">取消</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="close" id="btn2">已消费</a>
+    {{#  } else if(d.OrderStatus == 0){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cancel" id="btn1">取消</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="close" id="btn2">已消费</a>
+    {{#  } }}
+</script>
+
+
+<script type="text/javascript">
+    layui.use(['table', 'jquery', 'unobtrusive'], function () {
+        var table = layui.table,
+            unobtrusive = layui.unobtrusive,
+            layer = top.layer,
+            $ = layui.$;
+
+        table.render({
+            elem: '#DishesBook',
+            url: '@Url.Action("DishesBookList")',
+            page: true,
+            height: '472px',
+            cols: [[
+                { field: 'CustomerName', title: '顾客名称', width: '8%', align: 'center' },
+                 { field: 'HotelName', title: '店名', width: '10%', align: 'center' },
+                 { field: 'ConsumeTime', title: '消费时间', width: '15%', align: 'center', templet: function (d) { return layui.util.toDateString(d.ConsumeTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+                 { field: 'ConsumePersons', title: '消费人数', width: '8%', align: 'center' },
+                 { field: 'RoomType', title: '房间类型', width: '8%', align: 'center' },
+                 { field: 'CustomerPhone', title: '联系方式', width: '12%', align: 'center' },
+                 { field: 'Comments', title: '备注', width: '12%', align: 'center' },
+                 { field: 'BookTime', title: '订单时间', width: '15%', align: 'center', templet: function (d) { return layui.util.toDateString(d.BookTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+                 { title: '操作', toolbar: '#toollist', align: 'center' }
+            ]]
+        })
+
+        table.on('tool(BookList)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            var tr = obj.tr;
+            if (layEvent === 'cancel') {
+                data.OrderStatus = 1;
+                $.post("@Url.Action("OrderStatus")", { book: data }, function (res) {
+                    if (res == "1") {
+                        obj.del(tr);
+                        layer.msg("已取消！");
+                    }
+                })
+            }
+            else if (layEvent === 'close') {
+                data.OrderStatus = -1;
+                $.post("@Url.Action("OrderStatus")", { book: data }, function (res) {
+                    if (res == "1") {
+                        table.reload('DishesBook', {
+                            url: '@Url.Action("DishesBookList")',
+                        })
+                        layer.msg("已消费！");
+                    }
+                })
+            }
+        });
+
+        $('#btnQuery').click(function () {
+            var hotelName = $('#HotelName').val();
+            var customerName = $('#CustomerName').val();           
+                table.reload('DishesBook', {
+                    url: '@Url.Action("DishesBookList")',
+                    where: {
+                        hotelName: hotelName,
+                        customerName: customerName
+                    }
+                })
+        });
+
+    })
+</script>

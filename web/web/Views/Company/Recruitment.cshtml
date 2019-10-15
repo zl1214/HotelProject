@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "招聘信息";
+}
+
+@section CustomCss{
+
+    <link href="~/Content/CSS/News.css" rel="stylesheet" />
+}
+
+@section TopContent{
+
+    <blockquote class="layui-elem-quote"><h2>招聘信息</h2></blockquote>
+
+}
+
+@section down{
+    <div id="down">
+        <hr />
+        <div id="title"><h2>会议、餐饮、娱乐</h2></div>
+        <div id="downimg"><img src="~/Content/images/Carousel/娱乐.png" /></div>
+    </div>
+}
+
+<div id="NewsForm">   
+    <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
+</div>
+
+
+<script type="text/javascript">
+            layui.use(['table', 'jquery'], function () {
+                var table = layui.table,
+                    $ = layui.$;
+
+                //表格初始化
+                table.render({
+                    elem: '#newsTable',
+                    url: "@Url.Action("RecruitmentList","Company")",
+                    page: true,
+                    skin: 'nob',
+                    height: 480,
+                    cols: [[
+                        { field: 'PostName', title: '职位', width: '30%', align: 'center' },
+                        { field: 'PostType', title: '类别', width: '20%', align: 'center' },
+                        { field: 'PostPlace', title: '工作地点', width: '20%', align: 'center' },                        
+                        { field: 'PublishTime', title: '发布时间', width: '30%', align: 'center', templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } }
+                    ]]
+                });
+
+               
+
+                //双击获取详情
+                table.on('rowDouble(newsTable)', function (obj) {
+                    var postId = obj.data.PostId;
+                    window.location = '/Company/RecruitmentDetail?postId=' + postId;
+                });
+            })
+</script>

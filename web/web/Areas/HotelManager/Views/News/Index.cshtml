@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "新闻管理";
+}
+
+<div style="margin:0px 10px ">
+    <table id="newsTable" lay-filter="newsTable"></table>
+</div>
+
+
+<script type="text/javascript">
+    layui.use(['table', 'jquery', 'unobtrusive'], function () {
+        var table = layui.table,
+            layer = top.layer,
+            unobtrusive = layui.unobtrusive,
+            $ = layui.$;
+
+        //表格初始化
+        table.render({
+            elem: '#newsTable',
+            url: '@Url.Action("GetAllNews")',
+            page: true,
+            toolbar: 'default',
+            cols: [[
+                { type: 'checkbox', width: '8%', align: 'center' },
+                { type: 'numbers', title: '序号', width: '8%', align: 'center' },
+                { field: 'NewsTitle', title: '新闻标题', width: '16%', align: 'center' },
+                { field: 'NewsContents', title: '新闻内容', width: '38%', align: 'center' },
+                { field: 'CategoryName', title: '新闻分类', width: '10%', align: 'center' },
+                { field: 'PublishTime', title: '发布时间', align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+
+            ]]
+        });
+
+        //表格刷新
+        window.refreshTable = function () {
+            table.reload('newsTable', {
+                url: '@Url.Action("GetAllNews")',
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            })
+        };
+
+
+        //表头工具栏事件监听
+        table.on('toolbar(newsTable)', function (obj) {
+            var checkStatus = table.checkStatus('newsTable');
+
+            switch (obj.event) {
+                //添加事件
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: "添加新闻",
+                        area: ['900px', '500px'],
+                        offset: 'auto',
+                        content: ['/HotelManager/News/Creat', 'no']
+                    });
+                    break;
+
+                    //删除事件
+                case 'delete':
+                    var idNum = new Array();
+                    for (var i = 0; i < checkStatus.data.length; i++) {                        
+                        idNum.push(checkStatus.data[i].NewsId)
+                    }
+                    if (checkStatus.data.length == 0) {
+                        layer.msg("请选择要删除的对象！");
+                    }
+                    else if (checkStatus.data.length > 0) {
+                        layer.confirm("确认删除吗？", function () {
+                            $.ajax({
+                                type: "post",
+                                url: "@Url.Action("Delete")",
+                                data: JSON.stringify(idNum),
+                                contentType: 'application/json',
+                                success: function (res) {
+                                    if (res > 0) {
+                                        layer.msg("成功删除" + res + "个对象！");
+                                        top["main_content"].refreshTable();
+                                    }
+                                }
+                            });
+                        })
+                    }
+                    break;
+
+                    //更新事件
+                case 'update':
+                    if (checkStatus.data.length == 0) {
+                        layer.msg("请选择需要修改的对象！");
+                    }
+                    else if (checkStatus.data.length > 1) { layer.msg("一次只能修改一个对象！"); }
+                    else {
+                        var newsId = checkStatus.data[0].NewsId;
+                        layer.open({
+                            type: 2,
+                            title: "修改新闻",
+                            area: ['900px', '500px'],
+                            offset: 'auto',
+                            content: ['/HotelManager/News/Update?newsId=' + newsId, 'no']
+                        });
+                    }
+                    break;
+            }
+        });
+
+        //双击选中行事件
+        table.on('rowDouble(newsTable)', function (obj) {       
+            var newsId = obj.data.NewsId;
+            layer.open({
+                type: 2,
+                title: "修改新闻",
+                area: ['900px', '500px'],
+                offset: 'auto',
+                content: ['/HotelManager/News/Update?newsId=' + newsId, 'no']
+            });
+        });
+    })
+</script>
