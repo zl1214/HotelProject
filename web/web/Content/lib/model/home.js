@@ -251,6 +251,7 @@
             //选中第一个标签页
             $('#tab_Titles>li').eq(0).trigger('click');
         }
+       
     };
     //注册全局单击事件
     $body.on('click', '*[click-event]', function () {
