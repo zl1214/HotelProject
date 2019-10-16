@@ -1,15 +1,9 @@
 ﻿
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AdminLogin</title> 
+@section css{
+   <link href="~/Areas/HotelManager/CSS/Login.css" rel="stylesheet" />
+}
     
-    <link href="~/Areas/HotelManager/CSS/Login.css" rel="stylesheet" />
-</head>
-<body>
+
     <div id="panl">
         @using (Ajax.BeginForm("AdminLogin", "SysAdmin", new AjaxOptions() { OnComplete = "Login" }))
         {
@@ -68,7 +62,3 @@
         })
     </script>
 
-   
-
-</body>
-</html>

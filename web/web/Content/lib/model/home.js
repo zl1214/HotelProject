@@ -145,7 +145,12 @@
         fullScreen: function (that) {
             var screenFullClass = "layui-icon-screen-full",
                 screenRestorClass="layui-icon-screen-restore",
-                iconElem = $(that).children('i');
+                iconElem = $(that).children('i'),
+                userAgent = navigator.userAgent,//取得浏览器的userAgent字符串
+                isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1,//判断是否IE<11浏览器
+                isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1,//判断是否IE11浏览器
+                isEdge = userAgent.indexOf("Edge") > -1 && !isIE,//判断是否IE的Edge浏览器
+                IEVersion = parseFloat(RegExp["$1"]);//获取IE版本号
             
             if (iconElem.hasClass(screenFullClass)) {
                 var bodyElem = document.body;
@@ -155,8 +160,29 @@
                 else if (bodyElem.mozRequestFullScreen) {
                     bodyElem.mozRequestFullScreen();
                 }
-                else {
-                    bodyElem.requestFullScreen();
+                else if (isIE11) {
+                    //ie11以上支持，其他ie不支持
+                    bodyElem.msRequestFullscreen();                   
+                }
+                else if (isEdge) {
+                    if (typeof (window.ActiveXObject) != "undefined") {
+                        //这的方法 模拟f11键，使浏览器全屏
+                        var wscript = new ActiveXObject("WScript.Shell");
+                        if (wscript != null) {
+                            wscript.SendKeys("{F11}");
+                        }
+                    }
+                }
+                else if (isIE) {
+                        //低版本ie8/9/10使用ActiveXObject实现                       
+                        if (typeof (window.ActiveXObject) != "undefined") {
+                            //这的方法 模拟f11键，使浏览器全屏
+                            var wscript = new ActiveXObject("WScript.Shell");
+                            if (wscript != null) {
+                                wscript.SendKeys("{F11}");
+                            }
+                        }
+                        //注：ie调用ActiveX控件，需要在ie浏览器安全设置里面把 ‘未标记为可安全执行脚本的ActiveX控件初始化并执行脚本’ 设置为启用                                      
                 }
                 iconElem.addClass(screenRestorClass).removeClass(screenFullClass);
             }
@@ -168,8 +194,29 @@
                 else if (elem.mozCancelFullScreen) {
                     elem.mozCancelFullScreen();
                 }
-                else {
-                    elem.exitFullScreen();
+                else if (isIE11) {
+                    //ie11以上支持，其他ie不支持
+                    elem.msExitFullscreen();                  
+                }
+                else if (isEdge) {
+                    if (typeof (window.ActiveXObject) != "undefined") {
+                        //这的方法 模拟f11键，使浏览器全屏
+                        var wscript = new ActiveXObject("WScript.Shell");
+                        if (wscript != null) {
+                            wscript.SendKeys("{F11}");
+                        }
+                    }
+                }
+                else if (isIE) {
+                       //低版本ie8/9/10使用ActiveXObject实现                          
+                        if (typeof window.ActiveXObject != "undefined") {
+                            //这的方法 模拟f11键，使浏览器全屏
+                            var wscript = new ActiveXObject("WScript.Shell");
+                            if (wscript != null) {
+                                wscript.SendKeys("{F11}");
+                            }
+                        }
+                        //注：ie调用ActiveX控件，需要在ie浏览器安全设置里面把 ‘未标记为可安全执行脚本的ActiveX控件初始化并执行脚本’ 设置为启用                                       
                 }
                 iconElem.removeClass(screenRestorClass).addClass(screenFullClass);
             }
