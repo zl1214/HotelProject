@@ -120,7 +120,7 @@
         window.submitComplete = function (res) {
             if (res.responseText == "1") {
                 layer.msg("添加成功！");
-                top["main_content"].refreshTable();
+                top["/HotelManager/Recruitment/Index"].refreshTable();
                 Closelayer();
             }
             else {

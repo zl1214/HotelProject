@@ -70,7 +70,7 @@
         window.submitComplete = function (res) {          
             if (res.responseText == "1") {
                 layer.msg("修改成功！");
-                top["main_content"].refreshTable();
+                top["/HotelManager/News/Index"].refreshTable();
                 Closelayer();
             }
             else { layer.msg("修改失败！"); }

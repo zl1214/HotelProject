@@ -41,5 +41,17 @@ namespace BLL
         {
             return service.ModifyRecruitment(rec);
         }
+
+        //展示从Excel中导入的数据
+        public TableModel<Recruitment> ShowDataFromExcel(string filePath)
+        {
+            return service.ShowDataFromExcel(filePath);
+        }
+
+        //基于事务将Excel中的数据导入到数据库中
+        public int InputDataToDB(string filePath)
+        {
+            return service.InputDataToDB(filePath);
+        }
     }
 }

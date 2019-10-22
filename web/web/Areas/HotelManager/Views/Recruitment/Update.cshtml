@@ -42,8 +42,8 @@
                     <div class="layui-input-inline">
                         <select name="PostPlace">
                             <option selected>请选择...</option>
-                            <option value="天津">北京</option>
-                            <option value="北京">天津</option>
+                            <option value="北京">北京</option>
+                            <option value="天津">天津</option>
                         </select>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
         window.submitComplete = function (res) {         
             if (res.responseText == "1") {
                 layer.msg("修改成功！");
-                top["main_content"].refreshTable();
+                top["/HotelManager/Recruitment/Index"].refreshTable();
                 Closelayer();
             }
             else { layer.msg("修改失败！"); }

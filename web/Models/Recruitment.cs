@@ -11,7 +11,8 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Recruitment
     {
         public int PostId { get; set; }
@@ -27,5 +28,8 @@ namespace Models
         public string Manager { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+
+        [NotMapped]
+        public string PublishTimeStr { get { return PublishTime.ToString(); }}
     }
 }

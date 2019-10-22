@@ -62,5 +62,38 @@ namespace HotelProject.Areas.HotelManager.Controllers
             int res = manager.DeleteRecruitment(num);
             return Content(res.ToString());
         }
+
+        //展示上传数据
+        public ActionResult ShowData()
+        {
+            TableModel<Recruitment> table = manager.ShowDataFromExcel(src);
+            return Json(table, JsonRequestBehavior.AllowGet);
+        }
+
+        private static string src = null;
+        //文件上传
+        public ActionResult UploadExcelFile()
+        {
+            try
+            {
+                var file = Request.Files[0];
+                src = Server.MapPath("~/Content/ExcelFile/" + file.FileName);
+                file.SaveAs(src);
+                var json = new { code = 0, msg = "", data = new { src = "~/Content/ExcelFile/" + file.FileName } };
+                return Json(json, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = ex.ToString() });
+            }
+        }
+
+        //导入数据到数据库
+        public ActionResult InputData()
+        {
+            int res = manager.InputDataToDB(src);
+            src = null;
+            return Content(res.ToString());
+        }
     }
 }

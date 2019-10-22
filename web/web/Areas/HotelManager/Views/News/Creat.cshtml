@@ -60,7 +60,7 @@
         window.submitComplete = function (res) {
             if (res.responseText == "1") {
                 layer.msg("发布成功！");
-                top["main_content"].refreshTable();
+                top["/HotelManager/News/Index"].refreshTable();
                 Closelayer();
             }
             else {

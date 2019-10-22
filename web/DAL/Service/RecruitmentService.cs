@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Models;
 using System.Data;
 using System.Data.Entity;
+using System.Transactions;
 
 namespace DAL
 {
@@ -79,6 +80,79 @@ namespace DAL
                 obj.Email = rec.Email;
                 obj.PublishTime = rec.PublishTime;
                 return db.SaveChanges();
+            }
+        }
+
+        //展示从Excel中导入的数据
+        public TableModel<Recruitment> ShowDataFromExcel(string filePath)
+        {
+            DataSet ds = new NPOIGetDataFromExcel().GetDataFromExcel(filePath);
+            DataTable dt = ds.Tables[0];
+            List<Recruitment> list = new List<Recruitment>();
+            foreach (DataRow row in dt.Rows)
+            {              
+                    list.Add(new Recruitment()
+                    {
+                        PostName = row["职位"].ToString(),
+                        PostType = row["类别"].ToString(),
+                        PostPlace = row["工作地点"].ToString(),
+                        PostDesc = row["职位描述"].ToString(),
+                        PostRequire = row["职位要求"].ToString(),
+                        Experience = row["经验"].ToString(),
+                        EduBackground = row["学历"].ToString(),
+                        RequireCount = Convert.ToInt32(row["招聘人数"]),
+                        Email = row["邮箱"].ToString(),
+                        Manager = row["联系人"].ToString(),
+                        PhoneNumber = row["电话"].ToString(),
+                        PublishTime = Convert.ToDateTime(row["发布时间"])
+                    });                              
+            }
+            TableModel<Recruitment> table = new TableModel<Recruitment>();
+            table.code = 0;
+            table.count = list.Count;
+            table.data = list;
+            return table;
+        }
+
+        //基于事务将Excel中的数据导入到数据库中
+        public int InputDataToDB(string filePath)
+        {
+            DataSet ds = new NPOIGetDataFromExcel().GetDataFromExcel(filePath);
+            DataTable dt = ds.Tables[0];
+            using (HotelDBEntities db=new HotelDBEntities())
+            {
+                using (var cusTransaction=new TransactionScope())
+                {
+                    try
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            db.Recruitment.Add(new Recruitment()
+                            {
+                                PostName = row["职位"].ToString(),
+                                PostType = row["类别"].ToString(),
+                                PostPlace = row["工作地点"].ToString(),
+                                PostDesc = row["职位描述"].ToString(),
+                                PostRequire = row["职位要求"].ToString(),
+                                Experience = row["经验"].ToString(),
+                                EduBackground = row["学历"].ToString(),
+                                RequireCount = Convert.ToInt32(row["招聘人数"]),
+                                Email = row["邮箱"].ToString(),
+                                Manager = row["联系人"].ToString(),
+                                PhoneNumber = row["电话"].ToString(),
+                                PublishTime = Convert.ToDateTime(row["发布时间"])
+                            });                           
+                        }
+                       int res=db.SaveChanges();
+                       cusTransaction.Complete();
+                       return res;
+                    }
+                    catch (Exception ex)
+                    {
+                        Transaction.Current.Rollback();
+                        throw ex;
+                    }                   
+                }
             }
         }
     }

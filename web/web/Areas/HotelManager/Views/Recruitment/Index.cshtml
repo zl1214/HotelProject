@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "招聘管理";
 }
+<div class="layui-upload" style="margin:10px 10px ">
+    <button type="button" class="layui-btn" id="test1"><i class="layui-icon"></i>Excel导入</button>
+    <button type="button" class="layui-btn layui-btn-disabled" id="test2">保存</button>
+</div>
 
 <div style="margin:0px 10px ">
     <table id="Recruitment" lay-filter="RecruitmentTable"></table>
@@ -9,9 +13,10 @@
 
 
 <script type="text/javascript">
-    layui.use(['table', 'jquery', 'unobtrusive'], function () {
+    layui.use(['table', 'jquery', 'unobtrusive','upload'], function () {
         var table = layui.table,
             layer = top.layer,
+            upload=layui.upload,
             unobtrusive = layui.unobtrusive,
             $ = layui.$;
 
@@ -21,9 +26,9 @@
             url: '@Url.Action("RecruitmentList")',
             page: true,
             toolbar: 'default',
-            height:'510px',
+            height: '510px',
             cols: [[
-                { type: 'checkbox', width: '8%', align: 'center', fixed:'left'},
+                { type: 'checkbox', width: '8%', align: 'center', fixed: 'left' },
                 { field: 'PostName', title: '职位', width: '10%', align: 'center' },
                 { field: 'PostType', title: '类别', width: '10%', align: 'center' },
                 { field: 'PostPlace', title: '工作地点', width: '10%', align: 'center' },
@@ -35,9 +40,40 @@
                 { field: 'Manager', title: '联系人', width: '10%', align: 'center' },
                 { field: 'PhoneNumber', title: '电话', width: '15%', align: 'center' },
                 { field: 'Email', title: '邮箱', width: '15%', align: 'center' },
-                { field: 'PublishTime', title: '发布时间', width: '15%',align: 'center', sort: true, templet: function (d) { return layui.util.toDateString(d.PublishTime.replace("/Date(", "").replace(")/", "") * 1, 'yyyy-MM-dd HH:mm:ss') } },
+                { field: 'PublishTimeStr', title: '发布时间', width: '15%', align: 'center', sort: true},
 
             ]]
+        });
+
+        //Excel文件上传
+        upload.render({ //允许上传的文件后缀
+            elem: '#test1',
+            url: '@Url.Action("UploadExcelFile")',
+            accept: 'file', //普通文件
+            done: function (res) {
+                table.reload('Recruitment', {
+                    url: '@Url.Action("ShowData")',
+                    done: function () {
+                        $('#test2').removeClass("layui-btn layui-btn-disabled").addClass("layui-btn");
+                    }
+                })
+            }
+        });
+
+        //数据保存
+        $('#test2').click(function () {            
+            $(this).removeClass("layui-btn").addClass("layui-btn layui-btn-disabled");
+            $.post("/HotelManager/Recruitment/InputData",function (res) {
+                if (res > 0) {
+                    layer.msg("总共导入" + res + "条数据，数据导入成功！");                    
+                    table.reload('Recruitment', {
+                        url: '@Url.Action("RecruitmentList")'
+                    });                   
+                }
+                else {
+                    layer.msg("导入失败！");
+                }
+            })           
         });
 
         //表格刷新
@@ -115,7 +151,7 @@
         });
 
         //双击选中行事件
-        table.on('rowDouble(RecruitmentTable)', function (obj) {            
+        table.on('rowDouble(RecruitmentTable)', function (obj) {
             var postId = obj.data.PostId;
             layer.open({
                 type: 2,
@@ -127,5 +163,3 @@
         });
     })
 </script>
-
-

@@ -34,7 +34,7 @@
             if (!matchTo) {
                 //创建新的选项卡内容                
                 $tabBodys.append('<div class="layadmin-tabsbody-item">\
-                <iframe src="'+url+'" frameborder="0" class="layadmin-iframe"></iframe>\
+                <iframe src="' + url + '" frameborder="0" class="layadmin-iframe" name="' + url + '" id="main_content"></iframe>\
             </div>');
                 module.activeTabIndex = $tabHeader.length;
                 element.tabAdd('layout-tab', {

@@ -517,6 +517,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HotelManager\Models\" />
+    <Folder Include="Content\ExcelFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
