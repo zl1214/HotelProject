@@ -3,8 +3,9 @@
     ViewBag.Title = "招聘管理";
 }
 <div class="layui-upload" style="margin:10px 10px ">
+    <a href="@Url.Action("TemplateDownload")" class="layui-btn" id="test3">下载模板</a>
     <button type="button" class="layui-btn" id="test1"><i class="layui-icon"></i>Excel导入</button>
-    <button type="button" class="layui-btn layui-btn-disabled" id="test2">保存</button>
+    <button type="button" class="layui-btn layui-btn-disabled" id="test2">保存</button>    
 </div>
 
 <div style="margin:0px 10px ">
@@ -53,28 +54,33 @@
             done: function (res) {
                 table.reload('Recruitment', {
                     url: '@Url.Action("ShowData")',
-                    done: function () {
+                    done: function (res) {                        
                         $('#test2').removeClass("layui-btn layui-btn-disabled").addClass("layui-btn");
-                    }
+                        layer.msg(res.msg);
+                    }                  
                 })
             }
         });
 
         //数据保存
-        $('#test2').click(function () {            
-            $(this).removeClass("layui-btn").addClass("layui-btn layui-btn-disabled");
-            $.post("/HotelManager/Recruitment/InputData",function (res) {
+        $('#test2').click(function () {                  
+            $.post("/HotelManager/Recruitment/InputData", function (res) {                
                 if (res > 0) {
                     layer.msg("总共导入" + res + "条数据，数据导入成功！");                    
                     table.reload('Recruitment', {
-                        url: '@Url.Action("RecruitmentList")'
-                    });                   
+                        url: '@Url.Action("RecruitmentList")',
+                        done: function () {
+                            $('#test2').removeClass("layui-btn").addClass("layui-btn layui-btn-disabled");
+                        }                        
+                    });                    
                 }
                 else {
                     layer.msg("导入失败！");
                 }
             })           
         });
+
+      
 
         //表格刷新
         window.refreshTable = function () {
@@ -121,7 +127,7 @@
                                 contentType: 'application/json',
                                 success: function (res) {
                                     if (res > 0) {
-                                        layer.msg("成功删除" + res + "个对象！");
+                                        layer.msg("成功删除" + res + "条记录！");
                                         refreshTable();
                                     }
                                 }
@@ -135,7 +141,7 @@
                     if (checkStatus.data.length == 0) {
                         layer.msg("请选择需要修改的对象！");
                     }
-                    else if (checkStatus.data.length > 1) { layer.msg("一次只能修改一个对象！"); }
+                    else if (checkStatus.data.length > 1) { layer.msg("一次只能修改一条记录！"); }
                     else {
                         var postId = checkStatus.data[0].PostId;
                         layer.open({

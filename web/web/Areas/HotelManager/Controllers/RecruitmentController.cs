@@ -22,10 +22,10 @@ namespace HotelProject.Areas.HotelManager.Controllers
 
         public ActionResult RecruitmentList(int page, int limit)
         {
-            var list = manager.GetAllRecruitment(page,limit);
+            var list = manager.GetAllRecruitment(page, limit);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult Creat()
         {
             return View();
@@ -58,7 +58,7 @@ namespace HotelProject.Areas.HotelManager.Controllers
         }
 
         public ActionResult Delete(int[] num)
-        {           
+        {
             int res = manager.DeleteRecruitment(num);
             return Content(res.ToString());
         }
@@ -66,8 +66,16 @@ namespace HotelProject.Areas.HotelManager.Controllers
         //展示上传数据
         public ActionResult ShowData()
         {
-            TableModel<Recruitment> table = manager.ShowDataFromExcel(src);
-            return Json(table, JsonRequestBehavior.AllowGet);
+            try
+            {
+                TableModel<Recruitment> table = manager.ShowDataFromExcel(src);
+                return Json(table, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 0, msg = ex.ToString(), data = new { }, count = 0 });
+            }
+
         }
 
         private static string src = null;
@@ -94,6 +102,12 @@ namespace HotelProject.Areas.HotelManager.Controllers
             int res = manager.InputDataToDB(src);
             src = null;
             return Content(res.ToString());
+        }
+        //模板下载
+        public ActionResult TemplateDownload()
+        {
+            string filePath = Server.MapPath("~/Content/ExcelFile/ta.xlsx");//路径
+            return File(filePath, "application/x-xls", "Template.xlsx");
         }
     }
 }

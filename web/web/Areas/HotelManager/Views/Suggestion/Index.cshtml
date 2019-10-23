@@ -11,21 +11,21 @@
 
 
 <div id="DisplayPanel">
-    <div class="panel">
+    <div class="panel" data-id="0">
         <label class="layui-form-label">待受理</label>
         <div class="num"><label id="SugNum"></label></div>
     </div>
-    <div class="panel">
+    <div class="panel" data-id="1">
         <label class="layui-form-label">已受理</label>
         <div class="num"><label id="Handling"></label></div>
     </div>
-    <div class="panel">
+    <div class="panel" data-id="2">
         <label class="layui-form-label">已办结</label>
         <div class="num"><label id="Handled"></label></div>
     </div>
 </div>
 
-<div id="form">
+@*<div id="form">
     <div class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline">
@@ -38,7 +38,7 @@
             <div class="layui-inline"><button class="layui-btn"id="btnQuery">查&nbsp;&nbsp;&nbsp;&nbsp;询</button> </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <div class="table">
     <table id="demo" lay-filter="test"></table>
@@ -63,13 +63,13 @@
 
 
 <script type="text/javascript">
-    layui.use(['table', 'jquery', 'unobtrusive', 'form'], function () {       
+    layui.use(['table', 'jquery', 'unobtrusive', 'form'], function () {
         var table = layui.table,
            layer = top.layer,
            form=layui.form,
            unobtrusive = layui.unobtrusive,
            $ = layui.$;
-       
+
         //表格初始化
         table.render({
             elem: "#demo",
@@ -84,19 +84,31 @@
                 { field: 'PhoneNumber', title: '顾客电话', width: '12%', align: 'center' },
                 { field: 'Email', title: '顾客邮箱', width: '14%', align: 'center' },
                 { title: '操作', toolbar: '#toollist', align: 'center'}
-            ]]            
+            ]]
         });
 
-        //按钮的查询事件
+        @*//按钮的查询事件
         $('#btnQuery').click(function () {
             var statusId = $('#StatusId').val();
             //表格重载
             table.reload('demo', {
                 url: '@Url.Action("SuggestionList")',
                 where: { statusId: statusId },
-                page: { curr: 1 }                
+                page: { curr: 1 }
             })
-        });
+        });*@
+
+        //panel的查询事件
+        $('#DisplayPanel').on('click', '*[data-id]', function () {
+            var statusId = $(this).attr('data-id');
+        //表格重载
+            table.reload('demo', {
+                url: '@Url.Action("SuggestionList")',
+                where: { statusId: statusId },
+                page: { curr: 1 }
+            })
+    })
+
 
         var SugNum = @ViewBag.SugNum;
         var Handling = @ViewBag.Handling;
@@ -120,7 +132,7 @@
                         $('#Handling').text(Handling);
                         obj.del(tr);
                         layer.msg("已受理！");
-                       
+
                     }
                 })
             }
