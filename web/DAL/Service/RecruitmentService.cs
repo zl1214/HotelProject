@@ -105,6 +105,7 @@ namespace DAL
                         Manager = row["联系人"].ToString(),
                         PhoneNumber = row["电话"].ToString(),
                         PublishTime = Convert.ToDateTime(row["发布时间"])
+
                     });                              
             }
             TableModel<Recruitment> table = new TableModel<Recruitment>();

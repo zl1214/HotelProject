@@ -96,6 +96,7 @@
     <Content Include="Areas\HotelManager\CSS\images\用户名.PNG" />
     <Content Include="Areas\HotelManager\CSS\Login.css" />
     <Content Include="Areas\HotelManager\CSS\Suggestion.css" />
+    <Content Include="Content\CSS\admin.css" />
     <Content Include="Content\CSS\Company.css" />
     <Content Include="Content\CSS\Dishes.css" />
     <Content Include="Content\CSS\DishesBook.css" />
@@ -506,6 +507,7 @@
     <Content Include="Areas\HotelManager\Views\Recruitment\Update.cshtml" />
     <Content Include="Areas\HotelManager\Views\SysAdmin\AdminLogin.cshtml" />
     <Content Include="Areas\HotelManager\Views\SysAdmin\AdminMain.cshtml" />
+    <Content Include="Content\ExcelFile\ta.xlsx" />
     <None Include="Properties\PublishProfiles\HotelWeb.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -517,7 +519,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HotelManager\Models\" />
-    <Folder Include="Content\ExcelFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

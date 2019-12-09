@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using Models;
+using System.IO;
+using System.Text;
 
 namespace HotelProject.Areas.HotelManager.Controllers
 {
@@ -72,12 +74,12 @@ namespace HotelProject.Areas.HotelManager.Controllers
                 return Json(table, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
-            {
-                return Json(new { code = 0, msg = ex.ToString(), data = new { }, count = 0 });
+            {                
+                return Json(new { code = 0, msg = ex.ToString(), data = new {r= ex.ToString() }, count = 0 });
             }
 
         }
-
+       
         private static string src = null;
         //文件上传
         public ActionResult UploadExcelFile()
@@ -85,9 +87,9 @@ namespace HotelProject.Areas.HotelManager.Controllers
             try
             {
                 var file = Request.Files[0];
-                src = Server.MapPath("~/Content/ExcelFile/" + file.FileName);
+                src = Server.MapPath("/Content/ExcelFile/" + file.FileName);
                 file.SaveAs(src);
-                var json = new { code = 0, msg = "", data = new { src = "~/Content/ExcelFile/" + file.FileName } };
+                var json = new { code = 0, msg = "", data = new { src = "/Content/ExcelFile/" + file.FileName } };
                 return Json(json, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -106,7 +108,7 @@ namespace HotelProject.Areas.HotelManager.Controllers
         //模板下载
         public ActionResult TemplateDownload()
         {
-            string filePath = Server.MapPath("~/Content/ExcelFile/ta.xlsx");//路径
+            string filePath = Server.MapPath("/Content/ExcelFile/ta.xlsx");//路径
             return File(filePath, "application/x-xls", "Template.xlsx");
         }
     }
