@@ -109,6 +109,14 @@ namespace HotelProject.Areas.HotelManager.Controllers
         }
         #endregion
 
+        #region 图表展示
+        public ActionResult DishesEcharts()
+        {
+            List<dynamic > list = manager.GetCountByCategoryName();
+            return Json(list,JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
 
         #region 图片编辑方法
         //修改图片的名称为id.PNG

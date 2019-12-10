@@ -12,10 +12,15 @@ namespace BLL
     {
         private DishesSercive service = new DishesSercive();
 
-        //获取菜品列表
+        //获取菜品分类菜品列表
         public List<Dishes> GetAllDishes(int? categoryId)
         {
             return service.GetAllDishes(categoryId);
+        }
+        //根据菜品分类获取菜品总数
+        public List<dynamic> GetCountByCategoryName()
+        {
+            return service.GetCountByCategoryName();
         }
 
         //添加菜品返回菜品id

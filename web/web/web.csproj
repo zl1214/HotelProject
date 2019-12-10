@@ -252,6 +252,7 @@
     <Content Include="Content\layui\lay\modules\util.js" />
     <Content Include="Content\lib\index.js" />
     <Content Include="Content\lib\model\home.js" />
+    <Content Include="Content\script\echarts.min.js" />
     <Content Include="Content\script\unobtrusive.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />

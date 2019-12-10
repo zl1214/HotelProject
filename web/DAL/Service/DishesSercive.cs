@@ -37,6 +37,25 @@ namespace DAL
             }
         }
 
+        //获取所有菜品信息
+        public List<dynamic> GetCountByCategoryName()
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var list = from d in db.Dishes group d by d.DishesCategory.CategoryName into a select new { CategoryName = a.Key, Count = a.Count() };           
+                List<dynamic> dishesList = new List<dynamic>();
+                foreach (var item in list)
+                {
+                    dishesList.Add(new 
+                    {
+                        Count=item.Count,
+                        CategoryName = item.CategoryName 
+                    });
+                }
+                return dishesList;
+            }
+        }
+
         //菜品添加
         public int AddDishes(Dishes dishes)
         {
