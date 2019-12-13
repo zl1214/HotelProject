@@ -14,24 +14,65 @@
         <div class="layui-layout layui-layout-admin">
             <!--头部内容-->
             <div class="layui-row">
-                <div class="layui-col-md6">
+                <div class="layui-col-md2 layui-col-sm3 layui-col-xs2">
                     <img src="~/Content/images/Head/标题.png" />
                 </div>
-                <div class="layui-col-md6 " align="right">
+                <div class="layui-col-md4 layui-col-md-offset6 layui-col-sm4 layui-col-sm-offset5 layui-col-xs5 layui-col-xs-offset5" align="right">
                     <img src="~/Content/images/Head/地址.png" />
                 </div>
             </div>
+            
+                <div class="layui-header">
+                    <div class="layui-nav" id="nav" style="display:none;">                       
+                        <div class="layui-row" >
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("Index","Company")"><i class="layui-icon layui-icon-home">首页</i></a></div>
+                            </div>
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("Index","News")"><i class="layui-icon layui-icon-website">新闻动态</i></a></div>
+                            </div>
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("Index","Dishes")"><i class="layui-icon layui-icon-carousel">美食展示</i></a></div>
+                            </div>
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a></div>
+                            </div>
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("Suggestion", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a></div>
+                            </div>
+                            <div class="layui-col-md2">
+                                <div class="layui-nav-item"><a href="@Url.Action("Recruitment", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a></div>
+                            </div>
+                        </div>
+                </div>
 
-            <div class="layui-header">
-                <ul class="layui-nav">
-                    <li class="layui-nav-item"><a href="@Url.Action("Index","Company")"><i class="layui-icon layui-icon-home">首页</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("Index","News")"><i class="layui-icon layui-icon-website">新闻动态</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("Index","Dishes")"><i class="layui-icon layui-icon-carousel">美食展示</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("Environment","Company")"><i class="layui-icon layui-icon-tree">餐厅环境</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a></li>                    
-                    <li class="layui-nav-item"><a href="@Url.Action("Suggestion", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a></li>
-                    <li class="layui-nav-item"><a href="@Url.Action("Recruitment", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a></li>                
-                </ul>
+                    <div class="layui-layout-right" style="display:none;" id="select">
+                        <ul class="layui-nav">
+                            <li class="layui-nav-item">
+                                <a ><i class="layui-icon layui-icon-shrink-right" id="icon_flexible"></i></a>                            
+                                <dl class="layui-nav-child">
+                                    <dd>
+                                        <a href="@Url.Action("Index","Company")"><i class="layui-icon layui-icon-home">首页</i></a>
+                                    </dd>
+                                    <dd>
+                                        <a href="@Url.Action("Index","News")"><i class="layui-icon layui-icon-website">新闻动态</i></a></a>
+                                    </dd>                                   
+                                    <dd>
+                                        <a href="@Url.Action("Index","Dishes")"><i class="layui-icon layui-icon-carousel">美食展示</i></a>
+                                    </dd>
+                                    <dd>
+                                        <a href="@Url.Action("DishesBook","Dishes")"><i class="layui-icon layui-icon-form">在线预订</i></a>
+                                    </dd>
+                                    <dd>
+                                        <a href="@Url.Action("Suggestion", "Company")"><i class="layui-icon layui-icon-face-cry">投诉建议</i></a>
+                                    </dd>
+                                    <dd>
+                                        <a href="@Url.Action("Recruitment", "Company")"><i class="layui-icon layui-icon-chat">招聘信息</i></a>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
             </div>
         </div>
         <!--主内容区-->
@@ -56,7 +97,23 @@
     <script type="text/javascript">
         layui.use(['element','jquery'], function () {
             var element = layui.element,
-                $=layui.$;
+                $ = layui.$;
+
+            window.onload = function () {
+                window.onresize();
+            }
+            window.onresize = function () {
+                var screenWidth = $(".layui-container").width();
+                if (screenWidth <= 750) {
+                    $("#select").css("display", "inherit");
+                    $("#nav").css("display", "none");
+                }
+                else if (screenWidth >750)
+                {
+                    $("#select").css("display", "none");
+                    $("#nav").css("display", "inherit");
+                }
+            }
         });
     </script>    
 </body>

@@ -30,8 +30,8 @@
         </div>
         <div>
             <div class="layui-card">
-                <div class="layui-card-header">菜品统计饼图</div>
-                <div class="layui-card-body">
+                <div class="layui-card-header">菜品饼图统计</div>
+                <div class="layui-card-body" >
                     <div id="main1" style="width:1200px;height:400px;"></div>
                 </div>
             </div>
@@ -87,7 +87,19 @@
                     series: [{
                         name: '数量',
                         type: 'bar',
-                        data: CountArry
+                        data: CountArry,
+                        barWidth: 70,//柱子宽度
+                        barGap:1,//柱子间距
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    formatter: "{b} : {c} ",
+                                    position: "top",
+                                    color:"block"
+                                }
+                            }
+                        }
                     }]
                 });
             })
@@ -104,25 +116,33 @@
 
                 var myChartPie = echarts.init(document.getElementById('main1'));
                 // 使用刚指定的配置项和数据显示图表。
-                myChartPie.setOption({
-                    //title: {
-                    //    text: '菜品饼状统计图',
-                    //    left: 'center',
-                    //    top: 20,
-                    //    textStyle: {
-                    //        color: '#ccc'
-                    //    }
-                    //},
+                myChartPie.setOption({                   
+                    title: {
+                        text: '菜品饼状统计图',
+                        left: 'center',                       
+                        textStyle: {
+                            color: 'black'
+                        }
+                    },
+                    legend: {
+                        data: CategoryNameArry,
+                        orient: 'vertical',
+                        left:'85%'
+
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        data: ['数量']
-                    },
+                    },                    
                     series: [{
                         name: "菜品",
                         type: 'pie',
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: "{b} : {c} ({d}%)"
+                            }
+                        },
                         //roseType: 'angle',
                         data: DishesArry
                     }]

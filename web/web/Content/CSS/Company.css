@@ -1,9 +1,7 @@
-#test1{margin-top:10px;height:450px}
-.carousel img{height:100%;width:100%}
-#test2{margin-top:10px}
-.layui-elem-quote{height:250px}
-#text{width:600px;height:280px;float:left;margin-left:10px}
-#img{width:330px;height:270px;float:left;margin:30px 50px auto 100px}
+#carouse{padding-top:10px}
+.carousel img{ width: 100%;}
+
+.layui-elem-quote {margin-top:10px}
 #down{background-color:#FFFFFF;width:100%;padding-top:5px}
 #title{margin:20px 10px;padding-left:100px}
-#downimg{padding:0px 0px 20px 100px}
+#downimg{padding:0px 50px 20px 100px}
