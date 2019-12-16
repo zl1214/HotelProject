@@ -99,9 +99,6 @@
             var element = layui.element,
                 $ = layui.$;
 
-            window.onload = function () {
-                window.onresize();
-            }
             window.onresize = function () {
                 var screenWidth = $(".layui-container").width();
                 if (screenWidth <= 750) {
@@ -114,6 +111,9 @@
                     $("#nav").css("display", "inherit");
                 }
             }
+            $(document).ready(function () {
+                window.onresize();
+            });
         });
     </script>    
 </body>

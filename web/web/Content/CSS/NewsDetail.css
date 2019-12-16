@@ -1,10 +1,10 @@
 #down{background-color:#FFFFFF;width:100%;padding-top:5px}
 #title{margin:20px 10px;padding-left:100px}
-#downimg{padding:0px 0px 20px 100px}
+#downimg{padding:0px 50px 20px 100px}
 .layui-elem-quote{padding:20px 20px;background-color:#534d4d;color:#FFFFFF;margin:10px auto 0px auto}
-#newsDetail{width: 1140px;background-color:#ffffff;margin-bottom:10px}
+#newsDetail{background-color:#ffffff;margin-bottom:10px}
 #newsTitle {text-align:center;padding-top:20px
 }
-#newsPublishTime{width: 1000px;height: 30px;background-color: gainsboro;padding-top:10px;margin:20px 70px;text-align:center}
-#newsNewsContents {height:400px;width: 1000px;margin-left:70px
+#newsPublishTime{height: 30px;background-color: gainsboro;padding-top:10px;margin:20px 70px;text-align:center}
+#newsNewsContents {height:400px;margin-left:70px
 }

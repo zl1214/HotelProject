@@ -30,6 +30,6 @@ namespace Models
         public string Email { get; set; }
 
         [NotMapped]
-        public string PublishTimeStr { get { return PublishTime.ToString(); }}
+        public string PublishTimeStr { get { return PublishTime.Value.ToString("yyyy-MM-dd"); }}
     }
 }

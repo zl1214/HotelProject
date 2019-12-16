@@ -10,35 +10,37 @@
     }
 
 @section down{
-    <div id="down">
-    <hr />
-    <div id="title"><h2>会议、餐饮、娱乐</h2></div>
-    <div id="downimg"><img src="~/Content/images/Carousel/娱乐.png" /></div>
-</div>    
+   @Html.Partial("~/Views/Shared/Partial1.cshtml")   
     }
 
 <div id="NewsForm">
     <div class="layui-form" id="form">
         <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">新闻类别：</label>
-                <div class="layui-input-block">
-                    <select id="CategoryId">
-                        <option selected="" value="">请选择类别</option>
-                        <option value="1">公司新闻</option>
-                        <option value="2">社会新闻</option>
-                    </select>
+            <div class="layui-row">
+                <div class="layui-col-lg4 layui-col-md4 layui-col-xs6 layui-col-sm6">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">新闻类别：</label>
+                        <div class="layui-input-block">
+                            <select id="CategoryId">
+                                <option selected="" value="">请选择类别</option>
+                                <option value="1">公司新闻</option>
+                                <option value="2">社会新闻</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <button class="layui-btn" id="querystu">查  询</button>
+                <div class="layui-col-lg4 layui-col-md4 layui-col-xs6 layui-col-sm6">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <button class="layui-btn" id="querystu">查  询</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
-</div>
+            <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
+        </div>
 
 
         <script type="text/javascript">

@@ -510,6 +510,7 @@
     <Content Include="Areas\HotelManager\Views\SysAdmin\AdminMain.cshtml" />
     <Content Include="Content\ExcelFile\ta.xlsx" />
     <None Include="Properties\PublishProfiles\HotelWeb.pubxml" />
+    <Content Include="Views\Shared\Partial1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
